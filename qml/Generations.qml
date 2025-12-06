@@ -204,7 +204,7 @@ Page {
             delegate: ListItem {
                 id: delegateRoot
                 //width: parent.width
-                height: contentColumn.implicitHeight
+                height: Math.max(contentColumn.implicitHeight, units.gu(7))
 
                 leadingActions: ListItemActions {
                     actions: [
