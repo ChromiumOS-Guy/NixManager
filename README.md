@@ -6,7 +6,7 @@ Originally started [here](https://gitlab.com/ChromiumOS-Guy/lomiri-system-settin
 
 Then moved [here](https://gitlab.com/ChromiumOS-Guy/lomiri-system-settings-nixmanager).
 
-May move to an offical Ubports repo on gitlab as there were already plans to do so, as seen [here](https://gitlab.com/ubports/development/core/lomiri-system-settings-nixmanager) and ass discussed on telegram group.
+May move to an offical Ubports repo on gitlab as there were already plans to do so, as seen [here](https://gitlab.com/ubports/development/core/lomiri-system-settings-nixmanager) and as discussed on telegram group.
 
 ## License
 
