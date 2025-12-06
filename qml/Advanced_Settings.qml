@@ -155,7 +155,7 @@ Page {
             }
 
             Button {
-                text: timestamp_action == false ? "Allow" : uninstall_action == false ? "Change" : "Uninstall"
+                text: timestamp_action == true ? "Change" : uninstall_action == true ? "Uninstall" : do_insecure_packages == true ? "Allow" : search_settings == true ? "Apply" : "Unknown"
                 color: uninstall_action == false ? theme.palette.normal.positive : theme.palette.normal.negative
                 enabled: (timestamp != "" && timestamp_action == true) || do_insecure_packages == true || uninstall_action == true || search_settings == true
                 onClicked: {
