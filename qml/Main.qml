@@ -488,6 +488,7 @@ MainView {
                 delegate: ListItem {
                     id: delegateRoot
                     //width: parent.width
+                    height: contentColumn.implicitHeight
 
                     leadingActions: ListItemActions {
                         actions: [
@@ -520,33 +521,40 @@ MainView {
                     }
 
                     // Show name on top, and a single secondary label (summary OR last_updated)
-                    Column {
+                    ColumnLayout {
+                    id: contentColumn
                         anchors {
                             top: parent.top
                             // left: parent.swipe.complete == true ? parent.swipe.leftItem.right : parent.left
                             // right: parent.right
                             bottom: parent.bottom
                         }
+                        width: parent.width
                         //x: parent.swipe.leftItem != null ? (swipe.position * parent.swipe.leftItem.width) : this.x
 
                         Label {
+                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignHCenter
                             horizontalAlignment: Text.AlignHRight
                             text: model.name
                             font.bold: true
                             elide: Text.ElideRight
+                            wrapMode: Text.WordWrap
                         }
 
                         Label {
+                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignHCenter
                             horizontalAlignment: Text.AlignHRight
                             color: root.packages_to_install.includes(JSON.stringify(model.raw)) == true ? theme.palette.normal.positive : (root.packages_to_delete.includes(model.name) == true ? theme.palette.normal.negative : LomiriColors.warmGrey)
                             text: root.packages_to_install.includes(JSON.stringify(model.raw)) == true ? i18n.tr('Marked for installation') : (root.packages_to_delete.includes(model.name) == true ? i18n.tr('Marked for removal') : i18n.tr('Unknown State'))
                             elide: Text.ElideRight
                             visible: root.packages_to_install.includes(JSON.stringify(model.raw)) == true || root.packages_to_delete.includes(model.name) == true
+                            wrapMode: Text.WordWrap
                         }
 
                         Label {
+                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignHCenter
                             horizontalAlignment: Text.AlignHRight
                             // choose summary if non-empty, otherwise last_updated, otherwise empty
@@ -555,9 +563,11 @@ MainView {
                             text: chosen
                             elide: Text.ElideRight
                             visible: (chosen !== "" && root.packages_to_install.includes(JSON.stringify(model.raw)) == false) && root.packages_to_delete.includes(model.name) == false
+                            wrapMode: Text.WordWrap
                         }
 
                         Label {
+                            Layout.fillWidth: true
                             Layout.alignment: Qt.AlignHCenter
                             horizontalAlignment: Text.AlignHRight
                             // choose last_updated if non-empty and summary is non-empty, otherwise empty
@@ -565,6 +575,7 @@ MainView {
                             text: chosen
                             elide: Text.ElideRight
                             visible: (chosen !== "" && root.packages_to_install.includes(JSON.stringify(model.raw)) == false) && root.packages_to_delete.includes(model.name) == false
+                            wrapMode: Text.WordWrap
                         }
                     }
                 }

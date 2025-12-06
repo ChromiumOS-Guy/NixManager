@@ -5,7 +5,7 @@
    viewBox="0 0 250.00001 250.00001"
    version="1.1"
    id="svg6"
-   sodipodi:docname="NixLogo_desat.svg"
+   sodipodi:docname="NixLogo_app.svg"
    inkscape:version="1.4.2 (1:1.4.2+202505120737+ebf0e940d0)"
    inkscape:export-filename="NixLogo.png"
    inkscape:export-xdpi="96"
@@ -26,56 +26,91 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.7071068"
-     inkscape:cx="344.36099"
-     inkscape:cy="399.51532"
+     inkscape:zoom="0.35355339"
+     inkscape:cx="2114.2493"
+     inkscape:cy="312.5412"
      inkscape:window-width="2560"
      inkscape:window-height="1368"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="svg6"
-     showguides="true" />
+     showguides="true">
+    <sodipodi:guide
+       position="147.18178,88.371873"
+       orientation="0.8660254,-0.5"
+       id="guide7"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="136.87823,29.378221"
+       orientation="-0.8660254,-0.5"
+       id="guide8"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+    <sodipodi:guide
+       position="145.63,162.52406"
+       orientation="0,1"
+       id="guide9"
+       inkscape:locked="false"
+       inkscape:label=""
+       inkscape:color="rgb(0,134,229)" />
+  </sodipodi:namedview>
   <path
-     id="Binder003_f0000"
-     d="m 218.406,93.813069 -6.25,-10.825319 h -25 l 12.5,-21.65063 -12.5,-21.65064 -54.69001,94.72586 h 25 l 17.19,-29.77395 H 212.156 Z"
-     stroke="#ffd700"
-     stroke-width="0.35 px"
-     style="fill:#8c8c8c;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
-     transform="translate(14.715782,27.21579)" />
+     style="font-variation-settings:'wdth' 75, 'wght' 800;fill:#617c9e;fill-opacity:0.3;fill-rule:evenodd;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.3;stroke-opacity:1"
+     d="m -123.9442,-15.005383 414.13381,3.686601 -7.34869,282.562092 -394.63405,-4.07086 z"
+     id="path9"
+     sodipodi:nodetypes="ccccc" />
   <path
-     id="Binder002_f0000"
-     d="m 160.90599,2.16243 h -12.5 l -12.5,21.65064 -12.5,-21.65064 H 98.405993 l 54.689997,94.725862 12.5,-21.650632 -17.19,-29.77396 18.75,-32.47595 z"
-     stroke="#ffd700"
-     stroke-width="0.35 px"
-     style="fill:#b1b1b1;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
-     transform="translate(14.715782,27.21579)" />
+     style="font-variation-settings:'wdth' 75, 'wght' 800;fill:#617c9e;fill-opacity:0.3;fill-rule:evenodd;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.3;stroke-opacity:1"
+     d="M -51.445067,-105.56373 277.72917,-64.486592 433.48817,183.09773 247.7329,412.6277 Z"
+     id="path10"
+     sodipodi:nodetypes="ccccc" />
   <path
-     id="Binder001_f0000"
-     d="m 52.784214,6.13358 -6.25,10.82531 12.5,21.65064 h -25 l -12.5,21.65063 H 130.91421 l -12.5,-21.65063 H 84.034214 l -18.75,-32.47595 z"
-     stroke="#ffd700"
-     stroke-width="0.35 px"
-     style="fill:#8c8c8c;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
-     transform="translate(14.715782,27.21579)" />
-  <path
-     id="Binder_f0000"
-     d="m 2.162436,101.75536 6.25,10.82531 h 25 l -12.5,21.65064 12.5,21.65063 54.69,-94.72586 h -25 l -17.19,29.77396 h -37.5 z"
-     stroke="#ffd700"
-     stroke-width="0.35 px"
-     style="fill:#b1b1b1;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
-     transform="translate(14.715782,27.21579)" />
-  <path
-     id="Sketch001_w0000"
-     d="m 59.662436,193.40599 h 12.5 l 12.5,-21.65064 12.5,21.65064 h 25.000004 l -54.690004,-94.725859 -12.5,21.650639 17.19,29.77395 -18.75,32.47595 6.25,10.82532"
-     stroke="#000000"
-     stroke-width="0.35 px"
-     style="fill:#8b8b8b;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
-     transform="translate(14.715782,27.21579)" />
-  <path
-     id="Binder004_f0000"
-     d="m 167.78421,189.43485 6.25,-10.82532 -12.5,-21.65064 h 25.00001 l 12.5,-21.65063 H 89.654214 l 12.499996,21.65063 h 34.38 l 18.75,32.47596 z"
-     stroke="#ffd700"
-     stroke-width="0.35 px"
-     style="fill:#b1b1b1;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
-     transform="translate(14.715782,27.21579)" />
+     style="font-variation-settings:'wdth' 75, 'wght' 800;fill:#617c9e;fill-opacity:0.3;fill-rule:evenodd;stroke:none;stroke-width:0.2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:3.3;stroke-opacity:1"
+     d="M 125,200.04809 277.72917,-64.486591 -26.709095,-62.71977 Z"
+     id="path11"
+     sodipodi:nodetypes="cccc" />
+  <g
+     id="g6"
+     transform="translate(14.715782,27.21579)">
+    <path
+       id="Binder003_f0000"
+       d="m 218.406,93.813069 -6.25,-10.825319 h -25 l 12.5,-21.65063 -12.5,-21.65064 -54.69001,94.72586 h 25 l 17.19,-29.77395 H 212.156 Z"
+       stroke="#ffd700"
+       stroke-width="0.35 px"
+       style="fill:#5277c3;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+    <path
+       id="Binder002_f0000"
+       d="m 160.90599,2.16243 h -12.5 l -12.5,21.65064 -12.5,-21.65064 H 98.405993 l 54.689997,94.725862 12.5,-21.650632 -17.19,-29.77396 18.75,-32.47595 z"
+       stroke="#ffd700"
+       stroke-width="0.35 px"
+       style="fill:#7ebae4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+    <path
+       id="Binder001_f0000"
+       d="m 52.784214,6.13358 -6.25,10.82531 12.5,21.65064 h -25 l -12.5,21.65063 H 130.91421 l -12.5,-21.65063 H 84.034214 l -18.75,-32.47595 z"
+       stroke="#ffd700"
+       stroke-width="0.35 px"
+       style="fill:#5277c3;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+    <path
+       id="Binder_f0000"
+       d="m 2.162436,101.75536 6.25,10.82531 h 25 l -12.5,21.65064 12.5,21.65063 54.69,-94.72586 h -25 l -17.19,29.77396 h -37.5 z"
+       stroke="#ffd700"
+       stroke-width="0.35 px"
+       style="fill:#7ebae4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+    <path
+       id="Sketch001_w0000"
+       d="m 59.662436,193.40599 h 12.5 l 12.5,-21.65064 12.5,21.65064 h 25.000004 l -54.690004,-94.725859 -12.5,21.650639 17.19,29.77395 -18.75,32.47595 6.25,10.82532"
+       stroke="#000000"
+       stroke-width="0.35 px"
+       style="fill:#5277c3;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+    <path
+       id="Binder004_f0000"
+       d="m 167.78421,189.43485 6.25,-10.82532 -12.5,-21.65064 h 25.00001 l 12.5,-21.65063 H 89.654214 l 12.499996,21.65063 h 34.38 l 18.75,32.47596 z"
+       stroke="#ffd700"
+       stroke-width="0.35 px"
+       style="fill:#7ebae4;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:0.35;stroke-linecap:square;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0" />
+  </g>
 </svg>

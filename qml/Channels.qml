@@ -280,6 +280,8 @@ Page {
                 id: delegateRoot
                 //width: parent.width
 
+                height: contentColumn.implicitHeight
+
                 leadingActions: ListItemActions {
                     actions: [
                         Action {
@@ -308,36 +310,44 @@ Page {
                 }
 
                 // Show name on top, and a single secondary label (summary OR last_updated)
-                Column {
+                ColumnLayout {
+                    id: contentColumn
                     anchors {
                         top: parent.top
                         // left: parent.swipe.complete == true ? parent.swipe.leftItem.right : parent.left
                         // right: parent.right
                         bottom: parent.bottom
                     }
+                    width: parent.width
                     //x: parent.swipe.leftItem != null ? (swipe.position * parent.swipe.leftItem.width) : this.x
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         text: model.name
                         font.bold: true
                         elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
                     }
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         text: model.url
                         elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
                     }
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         text: i18n.tr('Protected channel.')
                         elide: Text.ElideRight
                         visible:  model.name == "home-manager" || model.name == "nixpkgs"
+                        wrapMode: Text.WordWrap
                     }
                 }
             }

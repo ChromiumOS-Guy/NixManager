@@ -269,6 +269,7 @@ Page {
             delegate: ListItem {
                 id: delegateRoot
                 //width: parent.width
+                height: contentColumn.implicitHeight
 
                 leadingActions: ListItemActions {
                     actions: [
@@ -295,24 +296,29 @@ Page {
                 }
 
                 // Show name on top, and a single secondary label (summary OR last_updated)
-                Column {
+                ColumnLayout {
+                    id: contentColumn
                     anchors {
                         top: parent.top
                         // left: parent.swipe.complete == true ? parent.swipe.leftItem.right : parent.left
                         // right: parent.right
                         bottom: parent.bottom
                     }
+                    width: parent.width
                     //x: parent.swipe.leftItem != null ? (swipe.position * parent.swipe.leftItem.width) : this.x
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         text: model.name
                         font.bold: true
+                        wrapMode: Text.WordWrap
                         elide: Text.ElideRight
                     }
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         // choose summary if non-empty, otherwise last_updated, otherwise empty
@@ -320,16 +326,19 @@ Page {
                                                 (model.last_updated && model.last_updated !== "") ? model.last_updated : ""
                         text: chosen
                         elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
                         visible: chosen !== ""
                     }
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         // choose last_updated if non-empty and summary is non-empty, otherwise empty
                         property string chosen: (model.summary && model.summary !== "") && (model.last_updated && model.last_updated !== "") ? model.last_updated : ""
                         text: chosen
                         elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
                         visible: chosen !== ""
                     }
                 }
@@ -358,6 +367,7 @@ Page {
             delegate: ListItem {
                 id: delegateRoot
                 //width: parent.width
+                height: contentColumn.implicitHeight
 
                 leadingActions: ListItemActions {
                     actions: [
@@ -384,21 +394,25 @@ Page {
                 }
 
                 // Show name on top, and a single secondary label (summary OR last_updated)
-                Column {
+                ColumnLayout {
+                    id: contentColumn
                     anchors {
                         top: parent.top
                         // left: parent.swipe.complete == true ? parent.swipe.leftItem.right : parent.left
                         // right: parent.right
                         bottom: parent.bottom
                     }
+                    width: parent.width
                     //x: parent.swipe.leftItem != null ? (swipe.position * parent.swipe.leftItem.width) : this.x
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         text: summery.stripPkgPrefix(model.name)
                         font.bold: true
                         elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
                     }
                 }
             }

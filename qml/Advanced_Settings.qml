@@ -278,14 +278,15 @@ Page {
             spacing: units.gu(2)
             enabled: true
             visible: true
-            anchors {
-                // topMargin: units.gu(2)
-                // bottomMargin: units.gu(2)
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
+            // anchors {
+            //     // topMargin: units.gu(2)
+            //     // bottomMargin: units.gu(2)
+            //     top: parent.top
+            //     left: parent.left
+            //     right: parent.right
+            //     bottom: parent.bottom
+            // }
+            width: parent.width
 
             Label {
                 Layout.alignment: Qt.AlignHCenter

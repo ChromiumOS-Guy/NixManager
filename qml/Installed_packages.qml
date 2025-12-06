@@ -139,6 +139,7 @@ Page {
             delegate: ListItem {
                 id: delegateRoot
                 //width: parent.width
+                height: contentColumn.implicitHeight
 
                 leadingActions: ListItemActions {
                     actions: [
@@ -170,7 +171,8 @@ Page {
                 }
 
                 // Show name on top, and a single secondary label (summary OR last_updated)
-                Column {
+                ColumnLayout {
+                    id: contentColumn
                     anchors {
                         top: parent.top
                         // left: parent.swipe.complete == true ? parent.swipe.leftItem.right : parent.left
@@ -178,22 +180,27 @@ Page {
                         bottom: parent.bottom
                     }
                     //x: parent.swipe.leftItem != null ? (swipe.position * parent.swipe.leftItem.width) : this.x
+                    width: parent.width
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         text: packageList.stripPkgPrefix(model.name)
                         font.bold: true
                         elide: Text.ElideRight
+                        wrapMode: Text.WordWrap
                     }
 
                     Label {
+                        Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
                         color: theme.palette.normal.negative
                         text: i18n.tr('Marked for removal')
                         elide: Text.ElideRight
                         visible: root.packages_to_delete.includes(model.name) == true
+                        wrapMode: Text.WordWrap
                     }
                 }
             }
