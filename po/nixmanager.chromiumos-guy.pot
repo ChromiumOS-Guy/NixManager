@@ -1,0 +1,388 @@
+#: ../qml/About.qml:32
+msgid "About"
+msgstr ""
+
+#: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:250
+#: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:220
+#: ../qml/Generations.qml:140 ../qml/Installed_packages.qml:75
+msgid "Back"
+msgstr ""
+
+#: ../qml/About.qml:77
+msgid "About Nix Manager:"
+msgstr ""
+
+#: ../qml/About.qml:85
+msgid ""
+"Nix Manager started as a Lomiri system settings plugin, but after UX "
+"discussions it was decided to become a standalone app."
+msgstr ""
+
+#: ../qml/About.qml:94
+msgid ""
+"Nix Manager is a project that began in tandem with Crackle's adoption of "
+"Nix. <br>I (ChromiumOS-Guy) developed the Python libraries Crackle uses to "
+"interact with Nix, which is how this project started. <br>There’s a forum "
+"post with more background: <br><a href=\"https://forums.ubports.com/"
+"topic/11067/snap-pop-crackle-....and-nix-the-future-of-crackle/8?"
+"_=1765038456437\">the forum post</a>"
+msgstr ""
+
+#: ../qml/About.qml:105
+msgid ""
+"This all culminated in this project, I hope you find it useful. \n"
+"The GUI aims to make Nix more accessible, since using the terminal isn’t "
+"always enjoyable on phone/tablet form factor."
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:68
+msgid "API url:"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:107
+msgid "New timeout (in seconds):"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:107
+msgid "New timestamp (in days):"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:146
+msgid "Use local search:"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:246
+msgid "Advanced settings"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:295
+msgid ""
+"Adjusts the timestamp that determines when old home-manager generations "
+"expire. \n"
+"The default of one month is sufficient for most users; change this only if "
+"you have a specific requirement (for example, longer retention for debugging "
+"or shorter retention to conserve disk space)."
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:300
+msgid "Change timestamp"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:319
+msgid ""
+"Modifying search settings is not recommended unless you understand the "
+"implications. \n"
+"Incorrect changes can break search functionality or cause unexpected "
+"behavior. \n"
+"Only adjust these settings if you are familiar with the relevant APIs and "
+"confident in troubleshooting any issues that arise."
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:327
+msgid ""
+"Current values are: \n"
+" enable_local_search = "
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:332
+msgid "Open search settings"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:351
+msgid ""
+"Allowing insecure packages is strongly discouraged. \n"
+"This may expose your system to known vulnerabilities, malware, or data "
+"loss. \n"
+"If you enable it, packages with unresolved CVEs or weakened integrity checks "
+"can be installed. \n"
+"This change is difficult to reverse — to fully restore safety you will need "
+"to reinstall Nix and Home Manager which will re-disable this option. \n"
+"Proceed only if you understand and accept the security risks."
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:358
+msgid "Allow insecure packages"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:377
+msgid ""
+"This will uninstall Nix and Home Manager, removing all packages and "
+"configurations installed through them. \n"
+"User data and system-wide files outside Nix may not be affected, but any "
+"software managed by Nix/Home Manager will be deleted. \n"
+"Ensure you have backups of important nix/home-manager managed data before "
+"proceeding."
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:383
+msgid "Uninstall nix/home-manager"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:419
+msgid "Uninstalling nix/home-manager, please wait."
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:490 ../qml/Advanced_Settings.qml:507
+#: ../qml/Apply_changes.qml:551 ../qml/Apply_changes.qml:568
+#: ../qml/Channels.qml:469 ../qml/Channels.qml:486 ../qml/Generations.qml:404
+#: ../qml/Generations.qml:421 ../qml/Installed_packages.qml:260
+#: ../qml/Installed_packages.qml:277 ../qml/Setup.qml:417 ../qml/Setup.qml:434
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: ../qml/Advanced_Settings.qml:494 ../qml/Apply_changes.qml:555
+#: ../qml/Channels.qml:473 ../qml/Generations.qml:408
+#: ../qml/Installed_packages.qml:264 ../qml/Setup.qml:421
+msgid "Copied!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:63 ../qml/Apply_changes.qml:103
+msgid "Installing packages, please wait."
+msgstr ""
+
+#: ../qml/Apply_changes.qml:110
+msgid "Package deletion successful!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:112 ../qml/Apply_changes.qml:130
+msgid "Package deletion/installation successful!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:128
+msgid "Package installation successful!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:147
+msgid "Package deletion failed!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:149 ../qml/Apply_changes.qml:160
+#: ../qml/Setup.qml:74
+msgid "Details"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:158
+msgid "Package installation failed!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:180
+msgid "Apply changes"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:211
+msgid "Packages to install:"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:345
+msgid "Packages to remove:"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:414
+msgid "Apply"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:443
+msgid "Removing packages, please wait."
+msgstr ""
+
+#: ../qml/Apply_changes.qml:480 ../qml/Apply_changes.qml:490
+#: ../qml/Setup.qml:357 ../qml/Setup.qml:367
+msgid "placeholder"
+msgstr ""
+
+#: ../qml/Channels.qml:57
+msgid "Channel name:"
+msgstr ""
+
+#: ../qml/Channels.qml:94
+msgid "Channel url:"
+msgstr ""
+
+#: ../qml/Channels.qml:139
+msgid "Adding channel, please wait."
+msgstr ""
+
+#: ../qml/Channels.qml:147
+msgid "Updating channels, please wait."
+msgstr ""
+
+#: ../qml/Channels.qml:216
+msgid "Channels"
+msgstr ""
+
+#: ../qml/Channels.qml:298
+msgid "Removing channel, please wait."
+msgstr ""
+
+#: ../qml/Channels.qml:338
+msgid "Protected channel."
+msgstr ""
+
+#: ../qml/Channels.qml:352
+msgid "Add"
+msgstr ""
+
+#: ../qml/Channels.qml:364
+msgid "Update"
+msgstr ""
+
+#: ../qml/Channels.qml:398 ../qml/Generations.qml:333
+msgid "Deleting Generation, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:58
+msgid "Deleting nix generations, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:66
+msgid "Deleting home-manager generations by timestamp, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:136
+msgid "Generations"
+msgstr ""
+
+#: ../qml/Generations.qml:223
+msgid "Switching generation, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:239
+msgid "Deleting generation, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:272
+msgid "Is current generation"
+msgstr ""
+
+#: ../qml/Generations.qml:287
+msgid "Delete old"
+msgstr ""
+
+#: ../qml/Generations.qml:299
+msgid "Expire by timestamp"
+msgstr ""
+
+#: ../qml/Installed_packages.qml:71
+msgid "Installed packages"
+msgstr ""
+
+#: ../qml/Installed_packages.qml:194 ../qml/Main.qml:544
+msgid "Marked for removal"
+msgstr ""
+
+#: ../qml/Main.qml:160 ../qml/Main.qml:218 ../qml/Setup.qml:92
+msgid "Nix Manager"
+msgstr ""
+
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the nixmanager.chromiumos-guy package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#: ../qml/Main.qml:207 ../qml/Main.qml:216
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: nixmanager.chromiumos-guy\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-06 18:07+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ../qml/Main.qml:245
+msgid "home-manager\n"
+msgstr ""
+
+#: ../qml/Main.qml:253
+msgid "Nix Generation "
+msgstr ""
+
+#: ../qml/Main.qml:263
+msgid " pending changes"
+msgstr ""
+
+#: ../qml/Main.qml:307
+msgid "Management:"
+msgstr ""
+
+#: ../qml/Main.qml:365
+msgid "Settings:"
+msgstr ""
+
+#: ../qml/Main.qml:473
+msgid "Search results: "
+msgstr ""
+
+#: ../qml/Main.qml:544
+msgid "Marked for installation"
+msgstr ""
+
+#: ../qml/Main.qml:544
+msgid "Unknown State"
+msgstr ""
+
+#: ../qml/Setup.qml:60
+msgid "Installation successful!"
+msgstr ""
+
+#: ../qml/Setup.qml:62 ../qml/Setup.qml:129
+msgid "Continue"
+msgstr ""
+
+#: ../qml/Setup.qml:72
+msgid "Installation failed!"
+msgstr ""
+
+#: ../qml/Setup.qml:112
+msgid "Welcome to Nix Manager!"
+msgstr ""
+
+#: ../qml/Setup.qml:120
+msgid ""
+"Nix home-manager needs to be installed before you can start using this "
+"application."
+msgstr ""
+
+#: ../qml/Setup.qml:162
+msgid "Please Choose a Channel:"
+msgstr ""
+
+#: ../qml/Setup.qml:215
+msgid "Stable, well tested, good for beginners and experienced users alike."
+msgstr ""
+
+#: ../qml/Setup.qml:225
+msgid ""
+"Unstable, bleeding edge, riddled with bugs not recommended for beginners. "
+"may not work."
+msgstr ""
+
+#: ../qml/Setup.qml:235
+msgid "Other, for testing. Only use if you know what you're doing!"
+msgstr ""
+
+#: ../qml/Setup.qml:244
+msgid "Please specify..."
+msgstr ""
+
+#: ../qml/Setup.qml:283
+msgid "Channel: "
+msgstr ""
+
+#: ../qml/Setup.qml:292
+msgid "Install nix/home manager"
+msgstr ""
+
+#: ../qml/Setup.qml:320
+msgid ""
+"Installing nix and home manager, this may take a few minutes — please wait."
+msgstr ""
+
+#: nixmanager.desktop.in.h:1
+msgid "NixManager"
+msgstr ""

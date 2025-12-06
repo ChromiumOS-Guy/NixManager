@@ -1,0 +1,5 @@
+{
+    "policy_groups": [],
+    "policy_version": "@APPARMOR_POLICY@",
+    "template": "unconfined"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "nixmanager.chromiumos-guy",
+    "description": "NixManager is a GUI for un/installing and managing Nix package manager.",
+    "architecture": "@CLICK_ARCH@",
+    "title": "NixManager",
+    "hooks": {
+        "nixmanager": {
+            "apparmor": "nixmanager.apparmor",
+            "desktop":  "nixmanager.desktop"
+        }
+    },
+    "version": "1.0.0",
+    "maintainer": "ChromiumOS-Guy <ChromiumOS-Guy-OpenSource@proton.me>",
+    "framework" : "@CLICK_FRAMEWORK@"
+}

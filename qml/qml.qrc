@@ -1,0 +1,13 @@
+<!DOCTYPE RCC>
+<RCC>
+  <qresource prefix="/">
+    <file>Main.qml</file>
+    <file>Setup.qml</file>
+    <file>Installed_packages.qml</file>
+    <file>Apply_changes.qml</file>
+    <file>Generations.qml</file>
+    <file>Channels.qml</file>
+    <file>Advanced_Settings.qml</file>
+    <file>About.qml</file>
+  </qresource>
+</RCC>

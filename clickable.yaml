@@ -1,0 +1,5 @@
+clickable_minimum_required: 8.0.0
+builder: cmake
+kill: nixmanager
+ignore_review_warnings: true
+skip_review: true
