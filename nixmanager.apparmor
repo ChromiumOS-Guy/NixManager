@@ -1,5 +1,16 @@
 {
-    "policy_groups": [],
-    "policy_version": "@APPARMOR_POLICY@",
-    "template": "unconfined"
+  "policy_groups": [],
+  "template": "unconfined",
+  "read_path": [
+    "$HOME",
+    "/nix",
+    "/etc/apt/sources.list.d",
+    "/etc/apt/sources.list",
+    "/etc/apt/trusted.gpg.d"
+  ],
+  "write_path": [
+    "$HOME",
+    "/nix"
+  ],
+  "policy_version": "@APPARMOR_POLICY@"
 }
