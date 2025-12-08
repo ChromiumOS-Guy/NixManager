@@ -1,5 +1,8 @@
 {
-  "policy_groups": [],
+  "policy_groups": [
+    "keep-display-on",
+    "networking"
+  ],
   "read_path": [
     "$HOME",
     "/nix"
