@@ -8,6 +8,8 @@ Then moved [here](https://gitlab.com/ChromiumOS-Guy/lomiri-system-settings-nixma
 
 May move to an offical Ubports repo on gitlab as there were already plans to do so, as seen [here](https://gitlab.com/ubports/development/core/lomiri-system-settings-nixmanager) and as discussed on telegram group.
 
+There is an [example video](https://github.com/ChromiumOS-Guy/NixManager/raw/refs/heads/main/assets/current-example.mp4) in assets.
+
 ## License
 
 Copyright (C) 2025  Your FullName
