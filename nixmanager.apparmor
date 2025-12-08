@@ -1,6 +1,5 @@
 {
   "policy_groups": [],
-  "template": "unconfined",
   "read_path": [
     "$HOME",
     "/nix"
