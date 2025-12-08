@@ -31,7 +31,6 @@ namespace SetupNixHomeManager {
         QStringList full_error;
         QStringList error;
         QString command; 
-        QString extraction_path = "$HOME/.tempcurlxz";
         bool success;
         bool command_success;
         
@@ -41,26 +40,24 @@ source $HOME/.profile
 check_cmd() {
     command -v "$1" > /dev/null 2>&1
 }
-export PATH="%1:$PATH"
 if ! check_cmd nix; then
     sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon --no-channel-add;
     . $HOME/.nix-profile/etc/profile.d/nix.sh
-    nix-channel --add https://nixos.org/channels/nixos-%2 nixpkgs
+    nix-channel --add https://nixos.org/channels/nixos-%1 nixpkgs
     nix-channel --update
 fi
 if ! check_cmd home-manager; then
-    nix-channel --add https://github.com/nix-community/home-manager/archive/release-%2.tar.gz home-manager
+    nix-channel --add https://github.com/nix-community/home-manager/archive/release-%1.tar.gz home-manager
     nix-channel --update
     nix-shell '<home-manager>' -A install
 fi
-EOF)").arg(extraction_path, version);
+EOF)").arg(version);
         } else { // modification here is hardcoded to urls that are dynamic as in, unstable channel is not specified version so likely-hood of change is low.
             command = QStringLiteral(R"(/bin/bash  <<'EOF'
 source $HOME/.profile
 check_cmd() {
     command -v "$1" > /dev/null 2>&1
 }
-export PATH="%1:$PATH"
 if ! check_cmd nix; then
     sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon;
     . $HOME/.nix-profile/etc/profile.d/nix.sh
@@ -71,16 +68,16 @@ if ! check_cmd home-manager; then
     nix-channel --update
     nix-shell '<home-manager>' -A install
 fi
-EOF)").arg(extraction_path);
+EOF)");
         }
 
-        std::tie(success, output, error) = SetupCurlXz::install_curlxz(extraction_path);
-        full_error.append(error);
-        full_output.append(output);
-        if (!success) {
-            full_error << QStringLiteral("failed to install temporary files (xz/curl).");
-            return {false, full_output, full_error};
-        }
+        // std::tie(success, output, error) = SetupCurlXz::install_curlxz(extraction_path);
+        // full_error.append(error);
+        // full_output.append(output);
+        // if (!success) {
+        //     full_error << QStringLiteral("failed to install temporary files (xz/curl).");
+        //     return {false, full_output, full_error};
+        // }
 
         std::tie(command_success, output, error) = exec_bash(command); // don't abort yet — we must clean up
         if (!command_success) {
@@ -89,12 +86,12 @@ EOF)").arg(extraction_path);
         full_error.append(error);
         full_output.append(output);
 
-        std::tie(success, output, error) = SetupCurlXz::remove_curlxz(extraction_path); // cleanup
-        full_error.append(error);
-        full_output.append(output);
-        if (!success) {
-            full_error << QStringLiteral("failed to clean temporary files!! (xz/curl).");
-        }
+        // std::tie(success, output, error) = SetupCurlXz::remove_curlxz(extraction_path); // cleanup
+        // full_error.append(error);
+        // full_output.append(output);
+        // if (!success) {
+        //     full_error << QStringLiteral("failed to clean temporary files!! (xz/curl).");
+        // }
 
         return {command_success, full_output, full_error};
     }
@@ -121,92 +118,92 @@ EOF)");
     }
 }
 
-namespace SetupCurlXz {
+// namespace SetupCurlXz {
 
-    std::tuple<bool, QStringList, QStringList>
-    install_curlxz(const QString& extraction_path) {
-        QStringList output;
-        QStringList full_error;
-        bool success;
-        QString detect_command = QStringLiteral(R"(/bin/bash <<'EOF'
-source $HOME/.profile
-check_cmd() {
-    command -v "$1" > /dev/null 2>&1
-}
-if check_cmd curl; then
-    if check_cmd xz; then
-        exit 0
-    else
-        exit 1
-    fi
-else
-    exit 1
-fi
-EOF)");
-        QString command = QStringLiteral(R"(/bin/bash <<'EOF'
-set -euo pipefail
-APTCACHE=${APTCACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/apt}
-APTSTATE=${APTSTATE:-${XDG_STATE_HOME:-$HOME/.local/state}/apt}
-APTSTATELOCK=${APTSTATELOCK:-${XDG_STATE_HOME:-$HOME/.local/state}/dpkg}
-APTCONFIG=${APTCONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/apt}
-OUTDIR="%1"
-[[ -d "$OUTDIR" ]] || mkdir -p "$OUTDIR";
-[[ -d "$APTCACHE" ]] || mkdir -p "$APTCACHE";
-[[ -d "$APTSTATE" ]] || mkdir -p "$APTSTATE";
-[[ -d "$APTSTATELOCK" ]] || mkdir -p "$APTSTATELOCK";
-[[ -d "$APTCONFIG" ]] || {
-mkdir -p $APTCONFIG/sources.list.d $APTCONFIG/preferences.d $APTCONFIG/trusted.gpg.d;
-ln -s /etc/apt/sources.list.d/* $APTCONFIG/sources.list.d;
-cp /etc/apt/sources.list "$APTCONFIG/sources.list" || true;
-if ls /etc/apt/trusted.gpg.d >/dev/null 2>&1; then
-  ln -s /etc/apt/trusted.gpg.d/* "$APTCONFIG"/trusted.gpg.d/
-fi
-}
-mkdir -p "$APTCACHE/archives" "$APTSTATE" "$APTCONFIG" "$OUTDIR"
-APT_GET="apt-get -o Dir::Cache=$APTCACHE -o Dir::State=$APTSTATE -o Dir::Etc=$APTCONFIG"
-# Ensure lists and download curl and xz-utils .debs only
-$APT_GET update -qq
-$APT_GET install --download-only -y curl xz-utils
-# Extract /usr/bin from each downloaded .deb into OUTDIR
-for deb in "$APTCACHE"/archives/{curl*,xz-utils*}.deb; do
-  [ -f "$deb" ] || continue
-  tmpdir=$(mktemp -d)
-  dpkg-deb -x "$deb" "$tmpdir"
-  if [ -d "$tmpdir"/usr/bin ]; then
-    mkdir -p "$OUTDIR"
-    find "$tmpdir"/usr/bin -type f -exec cp --preserve=mode,timestamps {} "$OUTDIR"/ \;
-  fi
-  rm -rf "$tmpdir"
-done
-EOF)").arg(extraction_path);
-        std::tie(success, output, full_error) = exec_bash(detect_command); // if already exists in path no reason to install
-        if (success) {
-            return {success, output, full_error}; // return tuple values
-        }
-        std::tie(success, output, full_error) = exec_bash(command); // actually run the bash code.
-        return {success, output, full_error}; // return tuple values
+//     std::tuple<bool, QStringList, QStringList>
+//     install_curlxz(const QString& extraction_path) {
+//         QStringList output;
+//         QStringList full_error;
+//         bool success;
+//         QString detect_command = QStringLiteral(R"(/bin/bash <<'EOF'
+// source $HOME/.profile
+// check_cmd() {
+//     command -v "$1" > /dev/null 2>&1
+// }
+// if check_cmd curl; then
+//     if check_cmd xz; then
+//         exit 0
+//     else
+//         exit 1
+//     fi
+// else
+//     exit 1
+// fi
+// EOF)");
+//         QString command = QStringLiteral(R"(/bin/bash <<'EOF'
+// set -euo pipefail
+// APTCACHE=${APTCACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/apt}
+// APTSTATE=${APTSTATE:-${XDG_STATE_HOME:-$HOME/.local/state}/apt}
+// APTSTATELOCK=${APTSTATELOCK:-${XDG_STATE_HOME:-$HOME/.local/state}/dpkg}
+// APTCONFIG=${APTCONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/apt}
+// OUTDIR="%1"
+// [[ -d "$OUTDIR" ]] || mkdir -p "$OUTDIR";
+// [[ -d "$APTCACHE" ]] || mkdir -p "$APTCACHE";
+// [[ -d "$APTSTATE" ]] || mkdir -p "$APTSTATE";
+// [[ -d "$APTSTATELOCK" ]] || mkdir -p "$APTSTATELOCK";
+// [[ -d "$APTCONFIG" ]] || {
+// mkdir -p $APTCONFIG/sources.list.d $APTCONFIG/preferences.d $APTCONFIG/trusted.gpg.d;
+// ln -s /etc/apt/sources.list.d/* $APTCONFIG/sources.list.d;
+// cp /etc/apt/sources.list "$APTCONFIG/sources.list" || true;
+// if ls /etc/apt/trusted.gpg.d >/dev/null 2>&1; then
+//   ln -s /etc/apt/trusted.gpg.d/* "$APTCONFIG"/trusted.gpg.d/
+// fi
+// }
+// mkdir -p "$APTCACHE/archives" "$APTSTATE" "$APTCONFIG" "$OUTDIR"
+// APT_GET="apt-get -o Dir::Cache=$APTCACHE -o Dir::State=$APTSTATE -o Dir::Etc=$APTCONFIG"
+// # Ensure lists and download curl and xz-utils .debs only
+// $APT_GET update -qq
+// $APT_GET install --download-only -y curl xz-utils
+// # Extract /usr/bin from each downloaded .deb into OUTDIR
+// for deb in "$APTCACHE"/archives/{curl*,xz-utils*}.deb; do
+//   [ -f "$deb" ] || continue
+//   tmpdir=$(mktemp -d)
+//   dpkg-deb -x "$deb" "$tmpdir"
+//   if [ -d "$tmpdir"/usr/bin ]; then
+//     mkdir -p "$OUTDIR"
+//     find "$tmpdir"/usr/bin -type f -exec cp --preserve=mode,timestamps {} "$OUTDIR"/ \;
+//   fi
+//   rm -rf "$tmpdir"
+// done
+// EOF)").arg(extraction_path);
+//         std::tie(success, output, full_error) = exec_bash(detect_command); // if already exists in path no reason to install
+//         if (success) {
+//             return {success, output, full_error}; // return tuple values
+//         }
+//         std::tie(success, output, full_error) = exec_bash(command); // actually run the bash code.
+//         return {success, output, full_error}; // return tuple values
 
-    }
+//     }
 
-    std::tuple<bool, QStringList, QStringList>
-    remove_curlxz(const QString& extraction_path) {
-        QStringList output;
-        QStringList full_error;
-        bool success; 
-        QString command = QStringLiteral(R"(/bin/bash <<'EOF'
-set -euo pipefail
-APTCACHE=${APTCACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/apt}
-APTSTATE=${APTSTATE:-${XDG_STATE_HOME:-$HOME/.local/state}/apt}
-APTSTATELOCK=${APTSTATELOCK:-${XDG_STATE_HOME:-$HOME/.local/state}/dpkg}
-APTCONFIG=${APTCONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/apt}
-OUTDIR="%1"
-rm -rf $OUTDIR $APTCONFIG $APTSTATE $APTSTATELOCK $APTCACHE;
-EOF)").arg(extraction_path);
-        std::tie(success, output, full_error) = exec_bash(command); // actually run the bash code.
-        return {success, output, full_error}; // return tuple values
+//     std::tuple<bool, QStringList, QStringList>
+//     remove_curlxz(const QString& extraction_path) {
+//         QStringList output;
+//         QStringList full_error;
+//         bool success; 
+//         QString command = QStringLiteral(R"(/bin/bash <<'EOF'
+// set -euo pipefail
+// APTCACHE=${APTCACHE:-${XDG_CACHE_HOME:-$HOME/.cache}/apt}
+// APTSTATE=${APTSTATE:-${XDG_STATE_HOME:-$HOME/.local/state}/apt}
+// APTSTATELOCK=${APTSTATELOCK:-${XDG_STATE_HOME:-$HOME/.local/state}/dpkg}
+// APTCONFIG=${APTCONFIG:-${XDG_CONFIG_HOME:-$HOME/.config}/apt}
+// OUTDIR="%1"
+// rm -rf $OUTDIR $APTCONFIG $APTSTATE $APTSTATELOCK $APTCACHE;
+// EOF)").arg(extraction_path);
+//         std::tie(success, output, full_error) = exec_bash(command); // actually run the bash code.
+//         return {success, output, full_error}; // return tuple values
 
-    }
-}
+//     }
+// }
 
 namespace DetectNixHomeManager{
     std::tuple<bool, QStringList, QStringList>

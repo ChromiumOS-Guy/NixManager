@@ -48,7 +48,7 @@ Page {
 
             Button {
                 text: "Delete"
-                color: theme.palette.normal.positive
+                color: theme.palette.normal.negative
                 onClicked: {
                     if (expire_action == false) {
                         generationList.visible = false;
@@ -289,7 +289,7 @@ Page {
             Item { Layout.fillWidth: true }
 
             Button {
-                color: theme.palette.normal.positive
+                color: theme.palette.normal.negative
                 Layout.alignment: Qt.AlignVCenter
                 text: i18n.tr("Delete old")
                 onClicked: {
@@ -301,7 +301,7 @@ Page {
             Item { Layout.fillWidth: true }
 
             Button {
-                color: theme.palette.normal.positive
+                color: theme.palette.normal.negative
                 Layout.alignment: Qt.AlignVCenter
                 text: i18n.tr("Expire by timestamp")
                 onClicked: {

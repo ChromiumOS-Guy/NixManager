@@ -59,8 +59,12 @@ Page {
                             loadingbar.enabled = false;
                             label0.text = i18n.tr('Installation successful!');
                             label0.color = theme.palette.normal.positive;
+                            root.reset_settings(); // reset settings.
                             reportbtn.text = i18n.tr('Continue');
-                            reportbtn.clicked.connect(function() { root.popPage();})
+                            reportbtn.clicked.connect(function() {
+                                root.init_main();
+                                root.popPage();
+                            })
                             report.visible = true;
                             report.enabled = true;
                         }

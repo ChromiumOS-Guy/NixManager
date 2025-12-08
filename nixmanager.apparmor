@@ -3,10 +3,7 @@
   "template": "unconfined",
   "read_path": [
     "$HOME",
-    "/nix",
-    "/etc/apt/sources.list.d",
-    "/etc/apt/sources.list",
-    "/etc/apt/trusted.gpg.d"
+    "/nix"
   ],
   "write_path": [
     "$HOME",

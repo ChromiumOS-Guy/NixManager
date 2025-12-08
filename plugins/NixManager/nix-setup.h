@@ -94,47 +94,47 @@ namespace SetupNixHomeManager {
     uninstall_nix_home_manager();
 }
 
-namespace SetupCurlXz {
-    /**
-    * @brief Downloads and extracts curl and xz-utils binaries to a temporary directory.
-    *
-    * Runs an isolated bash script that prepares APT state/cache/config directories (using
-    * XDG fallbacks), downloads the curl and xz-utils .deb packages without installing them,
-    * and extracts their /usr/bin contents into the specified output directory.
-    *
-    * The function constructs and executes the script, capturing stdout/stderr lines and
-    * returning success status plus collected output and error messages.
-    *
-    * @param extraction_path Absolute Path (runs in bash so ENV variables can be used) to the output directory where extracted binaries will be placed.
-    *                       The function creates the directory if it does not exist.
-    * @return std::tuple<bool, QStringList, QStringList>
-    *         - bool: true if the script completed successfully, false on failure.
-    *         - std::vector<std::string>: collected stdout output lines from the script.
-    *         - std::vector<std::string>: collected stderr/error lines from the script.
-    */
-    std::tuple<bool, QStringList, QStringList>
-    install_curlxz(const QString& extraction_path);
+// namespace SetupCurlXz {
+//     /**
+//     * @brief Downloads and extracts curl and xz-utils binaries to a temporary directory.
+//     *
+//     * Runs an isolated bash script that prepares APT state/cache/config directories (using
+//     * XDG fallbacks), downloads the curl and xz-utils .deb packages without installing them,
+//     * and extracts their /usr/bin contents into the specified output directory.
+//     *
+//     * The function constructs and executes the script, capturing stdout/stderr lines and
+//     * returning success status plus collected output and error messages.
+//     *
+//     * @param extraction_path Absolute Path (runs in bash so ENV variables can be used) to the output directory where extracted binaries will be placed.
+//     *                       The function creates the directory if it does not exist.
+//     * @return std::tuple<bool, QStringList, QStringList>
+//     *         - bool: true if the script completed successfully, false on failure.
+//     *         - std::vector<std::string>: collected stdout output lines from the script.
+//     *         - std::vector<std::string>: collected stderr/error lines from the script.
+//     */
+//     std::tuple<bool, QStringList, QStringList>
+//     install_curlxz(const QString& extraction_path);
 
-    /**
-    * @brief Remove temporary curl/xz files and apt state/cache created in install_curlxz.
-    *
-    * Runs a shell script that deletes the specified OUTDIR (extraction_path) and
-    * the resolved APT configuration/state/cache directories:
-    *   - APTCACHE (defaults to XDG_CACHE_HOME or $HOME/.cache/apt)
-    *   - APTSTATE (defaults to XDG_STATE_HOME or $HOME/.local/state/apt)
-    *   - APTCONFIG (defaults to XDG_CONFIG_HOME or $HOME/.config/apt)
-    *
-    * The function executes the script via exec_sh and returns the result tuple:
-    *   - success (bool): whether the removal command succeeded
-    *   - output (vector<string>): stdout lines from the command
-    *   - full_error (vector<string>): stderr or error lines from the command
-    *
-    * @param extraction_path Path used as OUTDIR for extracted binaries (will be removed).
-    * @return std::tuple<bool, QStringList, QStringList>
-    */
-    std::tuple<bool, QStringList, QStringList>
-    remove_curlxz(const QString& extraction_path);
-}
+//     /**
+//     * @brief Remove temporary curl/xz files and apt state/cache created in install_curlxz.
+//     *
+//     * Runs a shell script that deletes the specified OUTDIR (extraction_path) and
+//     * the resolved APT configuration/state/cache directories:
+//     *   - APTCACHE (defaults to XDG_CACHE_HOME or $HOME/.cache/apt)
+//     *   - APTSTATE (defaults to XDG_STATE_HOME or $HOME/.local/state/apt)
+//     *   - APTCONFIG (defaults to XDG_CONFIG_HOME or $HOME/.config/apt)
+//     *
+//     * The function executes the script via exec_sh and returns the result tuple:
+//     *   - success (bool): whether the removal command succeeded
+//     *   - output (vector<string>): stdout lines from the command
+//     *   - full_error (vector<string>): stderr or error lines from the command
+//     *
+//     * @param extraction_path Path used as OUTDIR for extracted binaries (will be removed).
+//     * @return std::tuple<bool, QStringList, QStringList>
+//     */
+//     std::tuple<bool, QStringList, QStringList>
+//     remove_curlxz(const QString& extraction_path);
+// }
 
 namespace DetectNixHomeManager {
     /**

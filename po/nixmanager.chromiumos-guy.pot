@@ -2,7 +2,7 @@
 msgid "About"
 msgstr ""
 
-#: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:250
+#: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:247
 #: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:220
 #: ../qml/Generations.qml:140 ../qml/Installed_packages.qml:75
 msgid "Back"
@@ -51,11 +51,11 @@ msgstr ""
 msgid "Use local search:"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:246
+#: ../qml/Advanced_Settings.qml:243
 msgid "Advanced settings"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:296
+#: ../qml/Advanced_Settings.qml:293
 msgid ""
 "Adjusts the timestamp that determines when old home-manager generations "
 "expire. \n"
@@ -64,11 +64,11 @@ msgid ""
 "or shorter retention to conserve disk space)."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:301
+#: ../qml/Advanced_Settings.qml:298
 msgid "Change timestamp"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:320
+#: ../qml/Advanced_Settings.qml:317
 msgid ""
 "Modifying search settings is not recommended unless you understand the "
 "implications. \n"
@@ -78,17 +78,17 @@ msgid ""
 "confident in troubleshooting any issues that arise."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:328
+#: ../qml/Advanced_Settings.qml:325
 msgid ""
 "Current values are: \n"
 " enable_local_search = "
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:333
+#: ../qml/Advanced_Settings.qml:330
 msgid "Open search settings"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:352
+#: ../qml/Advanced_Settings.qml:349
 msgid ""
 "Allowing insecure packages is strongly discouraged. \n"
 "This may expose your system to known vulnerabilities, malware, or data "
@@ -100,11 +100,11 @@ msgid ""
 "Proceed only if you understand and accept the security risks."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:359
+#: ../qml/Advanced_Settings.qml:356
 msgid "Allow insecure packages"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:378
+#: ../qml/Advanced_Settings.qml:375
 msgid ""
 "This will uninstall Nix and Home Manager, removing all packages and "
 "configurations installed through them. \n"
@@ -114,25 +114,25 @@ msgid ""
 "proceeding."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:384
+#: ../qml/Advanced_Settings.qml:381
 msgid "Uninstall nix/home-manager"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:420
+#: ../qml/Advanced_Settings.qml:417
 msgid "Uninstalling nix/home-manager, please wait."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:491 ../qml/Advanced_Settings.qml:508
+#: ../qml/Advanced_Settings.qml:488 ../qml/Advanced_Settings.qml:505
 #: ../qml/Apply_changes.qml:565 ../qml/Apply_changes.qml:582
 #: ../qml/Channels.qml:479 ../qml/Channels.qml:496 ../qml/Generations.qml:411
 #: ../qml/Generations.qml:428 ../qml/Installed_packages.qml:267
-#: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:417 ../qml/Setup.qml:434
+#: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:421 ../qml/Setup.qml:438
 msgid "Copy to Clipboard"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:495 ../qml/Apply_changes.qml:569
+#: ../qml/Advanced_Settings.qml:492 ../qml/Apply_changes.qml:569
 #: ../qml/Channels.qml:483 ../qml/Generations.qml:415
-#: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:421
+#: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:425
 msgid "Copied!"
 msgstr ""
 
@@ -157,7 +157,7 @@ msgid "Package deletion failed!"
 msgstr ""
 
 #: ../qml/Apply_changes.qml:149 ../qml/Apply_changes.qml:160
-#: ../qml/Setup.qml:74
+#: ../qml/Setup.qml:78
 msgid "Details"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid "Removing packages, please wait."
 msgstr ""
 
 #: ../qml/Apply_changes.qml:494 ../qml/Apply_changes.qml:504
-#: ../qml/Setup.qml:357 ../qml/Setup.qml:367
+#: ../qml/Setup.qml:361 ../qml/Setup.qml:371
 msgid "placeholder"
 msgstr ""
 
@@ -266,11 +266,11 @@ msgstr ""
 msgid "Installed packages"
 msgstr ""
 
-#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:550
+#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:562
 msgid "Marked for removal"
 msgstr ""
 
-#: ../qml/Main.qml:160 ../qml/Main.qml:218 ../qml/Setup.qml:92
+#: ../qml/Main.qml:172 ../qml/Main.qml:230 ../qml/Setup.qml:96
 msgid "Nix Manager"
 msgstr ""
 
@@ -279,13 +279,13 @@ msgstr ""
 # This file is distributed under the same license as the nixmanager.chromiumos-guy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../qml/Main.qml:207 ../qml/Main.qml:216
+#: ../qml/Main.qml:219 ../qml/Main.qml:228
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: nixmanager.chromiumos-guy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-08 14:58+0000\n"
+"POT-Creation-Date: 2025-12-08 17:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,35 +294,35 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:245
+#: ../qml/Main.qml:257
 msgid "home-manager\n"
 msgstr ""
 
-#: ../qml/Main.qml:253
+#: ../qml/Main.qml:265
 msgid "Nix Generation "
 msgstr ""
 
-#: ../qml/Main.qml:263
+#: ../qml/Main.qml:275
 msgid " pending changes"
 msgstr ""
 
-#: ../qml/Main.qml:307
+#: ../qml/Main.qml:319
 msgid "Management:"
 msgstr ""
 
-#: ../qml/Main.qml:365
+#: ../qml/Main.qml:377
 msgid "Settings:"
 msgstr ""
 
-#: ../qml/Main.qml:473
+#: ../qml/Main.qml:485
 msgid "Search results: "
 msgstr ""
 
-#: ../qml/Main.qml:550
+#: ../qml/Main.qml:562
 msgid "Marked for installation"
 msgstr ""
 
-#: ../qml/Main.qml:550
+#: ../qml/Main.qml:562
 msgid "Unknown State"
 msgstr ""
 
@@ -330,55 +330,55 @@ msgstr ""
 msgid "Installation successful!"
 msgstr ""
 
-#: ../qml/Setup.qml:62 ../qml/Setup.qml:129
+#: ../qml/Setup.qml:63 ../qml/Setup.qml:133
 msgid "Continue"
 msgstr ""
 
-#: ../qml/Setup.qml:72
+#: ../qml/Setup.qml:76
 msgid "Installation failed!"
 msgstr ""
 
-#: ../qml/Setup.qml:112
+#: ../qml/Setup.qml:116
 msgid "Welcome to Nix Manager!"
 msgstr ""
 
-#: ../qml/Setup.qml:120
+#: ../qml/Setup.qml:124
 msgid ""
 "Nix home-manager needs to be installed before you can start using this "
 "application."
 msgstr ""
 
-#: ../qml/Setup.qml:162
+#: ../qml/Setup.qml:166
 msgid "Please Choose a Channel:"
 msgstr ""
 
-#: ../qml/Setup.qml:215
+#: ../qml/Setup.qml:219
 msgid "Stable, well tested, good for beginners and experienced users alike."
 msgstr ""
 
-#: ../qml/Setup.qml:225
+#: ../qml/Setup.qml:229
 msgid ""
 "Unstable, bleeding edge, riddled with bugs not recommended for beginners. "
 "may not work."
 msgstr ""
 
-#: ../qml/Setup.qml:235
+#: ../qml/Setup.qml:239
 msgid "Other, for testing. Only use if you know what you're doing!"
 msgstr ""
 
-#: ../qml/Setup.qml:244
+#: ../qml/Setup.qml:248
 msgid "Please specify..."
 msgstr ""
 
-#: ../qml/Setup.qml:283
+#: ../qml/Setup.qml:287
 msgid "Channel: "
 msgstr ""
 
-#: ../qml/Setup.qml:292
+#: ../qml/Setup.qml:296
 msgid "Install nix/home manager"
 msgstr ""
 
-#: ../qml/Setup.qml:320
+#: ../qml/Setup.qml:324
 msgid ""
 "Installing nix and home manager, this may take a few minutes — please wait."
 msgstr ""

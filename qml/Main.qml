@@ -75,6 +75,23 @@ MainView {
         stack.pop()
     }
 
+    function init_main() {
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_detect_nix_home_manager(root.currentRequestId); // check if there is an installation and redirect to setup if false
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_hm_version(root.currentRequestId); // check home manager version
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_list_generations(root.currentRequestId); 
+    }
+
+    function reset_settings() { //gets called after un/install after if no nix is detected.
+        root.expire_generation_timestamp = "-30 days"
+        root.allow_insecure_pakcages = false
+        root.enable_local_search = false
+        root.search_api_url = "https://search.devbox.sh"
+        root.api_timeout = 10
+    }
+
      Connections {
         target: NixManagerPlugin
         
@@ -110,7 +127,7 @@ MainView {
                         }
                     } else {
                         if (operation == "detect_nix_home_manager") { // redirect to Setup if no installation is found.
-                            allow_insecure_pakcages = false; // also save into settings when implemented!
+                            root.reset_settings();
                             loadQml("Setup.qml");
                         } else if (operation == "hm_version") {
                             root.hm_version = "!!could not find version!!";
@@ -146,12 +163,7 @@ MainView {
         id: mainPage
 
         Component.onCompleted: {
-            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-            NixManagerPlugin.request_detect_nix_home_manager(root.currentRequestId); // check if there is an installation and redirect to setup if false
-            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-            NixManagerPlugin.request_hm_version(root.currentRequestId); // check home manager version
-            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-            NixManagerPlugin.request_list_generations(root.currentRequestId); 
+            root.init_main();
         }
 
         header: PageHeader {

@@ -186,9 +186,7 @@ Page {
                 onClicked: {
                     if (timestamp_action == true) {root.expire_generation_timestamp = "-30 days";}
                     if (search_settings == true) {
-                        root.enable_local_search = false
-                        root.search_api_url = "https://search.devbox.sh"
-                        root.api_timeout = 10
+                        root.popPage()
                     }
                     PopupUtils.close(dialogue)
                 }
@@ -217,10 +215,9 @@ Page {
                     // Example processing:
                     if (result.success) {
                         if (operation == "uninstall_nix_home_manager") {
-                            advancedsettingsList.visible = true;
-                            advancedsettingsList.enabled = true;
-                            loadingbar.visible = false;
-                            loadingbar.enabled = false;
+                            root.popPage();
+                            root.reset_settings();
+                            root.init_main();
                         }
                         
                     } else {
