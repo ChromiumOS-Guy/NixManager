@@ -1,15 +1,5 @@
 {
-  "policy_groups": [
-    "keep-display-on",
-    "networking"
-  ],
-  "read_path": [
-    "$HOME",
-    "/nix"
-  ],
-  "write_path": [
-    "$HOME",
-    "/nix"
-  ],
-  "policy_version": "@APPARMOR_POLICY@"
+    "policy_groups": [],
+    "policy_version": "@APPARMOR_POLICY@",
+    "template": "unconfined"
 }
