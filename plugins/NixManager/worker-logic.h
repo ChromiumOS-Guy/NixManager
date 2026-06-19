@@ -65,7 +65,7 @@ public:
     // =========================================================================
     // Blocking Setup Wrappers (Return custom formatted JSON string)
     // =========================================================================
-    static QString install_nix_home_manager_sync(const QString& version);
+    static QString install_nix_home_manager_sync(const QString& nix_version, const QString& hw_version);
     static QString uninstall_nix_home_manager_sync();
     static QString detect_nix_home_manager_sync();
 };

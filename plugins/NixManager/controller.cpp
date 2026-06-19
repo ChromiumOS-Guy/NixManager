@@ -171,10 +171,11 @@ void Controller::request_hm_list_generations(const QVariant& requestId)
         Q_ARG(QString, "hm_list_generations"));
 }
 
-void Controller::request_install_nix_home_manager(const QVariant& requestId, const QString& version)
+void Controller::request_install_nix_home_manager(const QVariant& requestId, const QString& nix_version, const QString& hw_version)
 {
     QMetaObject::invokeMethod(m_worker, "install_nix_home_manager", Qt::QueuedConnection,
-        Q_ARG(QString, version),
+        Q_ARG(QString, nix_version),
+        Q_ARG(QString, hw_version),
         Q_ARG(QVariant, requestId),
         Q_ARG(QString, "install_nix_home_manager"));
 }

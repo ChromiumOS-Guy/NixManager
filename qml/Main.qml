@@ -27,6 +27,89 @@ MainView {
     applicationName: 'nixmanager.chromiumos-guy'
     automaticOrientation: true
 
+    // latest hw/nix channels!!!
+    property string latest_nix: "26.05"
+    property string latest_hw: "26.05"
+    property bool is_latest: true
+    property string hw_channel_url: ""
+    property string nix_channel_url: ""
+
+    //   {"name": "name", "url": "url"}
+
+    function set_is_latest(channels) {
+        if (!channels || !channels.length) return;
+
+        for (var i = 0; i < channels.length; i++) {
+            try {
+                var obj = JSON.parse(channels[i]);
+                var version = get_channel_version_from_url(obj["url"]);
+                if (obj["name"] == "home-manager" && version != root.latest_nix) {
+                    root.is_latest = false;
+                }
+                if (obj["name"] == "nixpkgs" && version != root.latest_hw) {
+                    root.is_latest = false;
+                }
+            } catch (e) {
+                console.log("Failed to parse channels[" + i + "]: " + e);
+            }
+        }
+    }
+
+    function set_protected_channels (channels) {
+        if (!channels || !channels.length) return;
+
+        for (var i = 0; i < channels.length; i++) {
+            try {
+                var obj = JSON.parse(channels[i]);
+                var version = get_channel_version_from_url(obj["url"]);
+                if (obj["name"] == "home-manager") {
+                    root.hw_channel_url = obj["url"];
+                } else if (obj["name"] == "nixpkgs") {
+                    root.nix_channel_url = obj["url"];
+                }
+            } catch (e) {
+                console.log("Failed to parse channels[" + i + "]: " + e);
+            }
+        }
+    }
+
+    function get_channel_version_from_url(url) {
+        // Regex matches the xx.xx pattern in the URL (where x is a number)
+        var match = url.match(/\d{2}\.\d{2}/);
+        return match ? match[0] : ""; // Returns the version string or empty if not found
+    }
+
+    function replace_version_in_url(url, newVersion) {
+        // This looks for the pattern xx.xx and replaces it with the newVersion string
+        return url.replace(/\d{2}\.\d{2}/, newVersion);
+    }
+
+    function update_channels_latest() {
+        if (root.is_latest) {
+            return;
+        }
+
+        var new_hw_channel_url = replace_version_in_url(root.hw_channel_url, root.latest_hw);
+        var new_nix_channel_url = replace_version_in_url(root.nix_channel_url, root.latest_nix);
+
+        // void request_add_channel(const QVariant& requestId, const QString& url, const QString& name);
+        // void request_remove_channel(const QVariant& requestId, const QString& name);
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_remove_channel(root.currentRequestId, "home-manager");
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_remove_channel(root.currentRequestId, "nixpkgs");
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_add_channel(root.currentRequestId, new_hw_channel_url, "home-manager");
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_add_channel(root.currentRequestId, new_nix_channel_url, "nixpkgs");
+
+        root.is_latest = true;
+        root.channels_outdated = true;
+        outdatedLabel.visible = true;
+        outdatedLabel.enabled = true;
+    }
+
+
     property string currentRequestId: ""
     property string hm_version: ""
     property string nix_generation: ""
@@ -40,6 +123,7 @@ MainView {
         property string search_api_url: "https://search.devbox.sh"
         property int api_timeout: 10
         property string expire_generation_timestamp: "-30 days"
+        property bool channels_outdated: false
     }
 
     property alias allow_insecure_pakcages: s.allow_insecure_packages
@@ -47,6 +131,7 @@ MainView {
     property alias search_api_url: s.search_api_url
     property alias api_timeout: s.api_timeout
     property alias expire_generation_timestamp: s.expire_generation_timestamp // expire older then a month
+    property bool channels_outdated: s.channels_outdated
 
     function loadQml(path) {
         var comp = Qt.createComponent(path);
@@ -75,6 +160,13 @@ MainView {
         stack.pop()
     }
 
+    // Settings-backed binding won't refresh live, so flip the label by id.
+    function hide_outdated_label() {
+        root.channels_outdated = false;
+        outdatedLabel.visible = false;
+        outdatedLabel.enabled = false;
+    }
+
     function init_main() {
         root.currentRequestId = "VERSION_REQUEST_" + Date.now();
         NixManagerPlugin.request_detect_nix_home_manager(root.currentRequestId); // check if there is an installation and redirect to setup if false
@@ -82,6 +174,8 @@ MainView {
         NixManagerPlugin.request_hm_version(root.currentRequestId); // check home manager version
         root.currentRequestId = "VERSION_REQUEST_" + Date.now();
         NixManagerPlugin.request_list_generations(root.currentRequestId); 
+        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+        NixManagerPlugin.request_list_channels(root.currentRequestId);
     }
 
     function reset_settings() { //gets called after un/install after if no nix is detected.
@@ -124,6 +218,12 @@ MainView {
                             console.debug(resultJson);
                             searchbusy.running = false;
                             searchpackages.setPackages(result.output);
+                        } else if (operation == "list_channels") {
+                            root.set_is_latest(result.output);
+                            root.set_protected_channels(result.output);
+                        } else if (operation == "add_channel") {
+                            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+                            NixManagerPlugin.request_list_channels(root.currentRequestId);
                         }
                     } else {
                         if (operation == "detect_nix_home_manager") { // redirect to Setup if no installation is found.
@@ -204,7 +304,6 @@ MainView {
                 id: searchbtn
                 name: "toolkit_input-search" // Lomiri search icon
                 color: LomiriColors.warmGrey  // Set icon color
-                anchors.verticalCenter: parent.verticalCenter
 
                 MouseArea {
                     anchors.fill: parent
@@ -247,6 +346,22 @@ MainView {
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
+            }
+
+            Label {
+                Layout.alignment: Qt.AlignHCenter
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.WordWrap
+                Layout.preferredWidth: parent.width * 0.9
+                font.bold: true
+                text: i18n.tr("your channels (NIX: " + 
+                                root.get_channel_version_from_url(root.nix_channel_url) + 
+                                "/HM: " + 
+                                root.get_channel_version_from_url(root.hw_channel_url) + 
+                                ") are outdated consider updating.")
+                visible: !root.is_latest
+                enabled: !root.is_latest
+
             }
 
             Label {
@@ -306,7 +421,6 @@ MainView {
                     }
                     name: "toolkit_chevron-ltr_1gu"
                     color: LomiriColors.warmGrey  // Set icon color
-                    anchors.verticalCenter: parent.verticalCenter
                 }
             }
 
@@ -328,8 +442,8 @@ MainView {
             ListView {
                 id: optionsView0
                 model: optionsModel0
-                width: parent.width
-                height: optionsModel0.count * units.gu(6)
+                Layout.fillWidth: true
+                Layout.preferredHeight: optionsModel0.count * units.gu(6)
                 clip: true
                 interactive: false            // disables flick/drag
                 boundsBehavior: Flickable.StopAtBounds
@@ -363,7 +477,6 @@ MainView {
                         }
                         name: "toolkit_chevron-ltr_1gu"
                         color: LomiriColors.warmGrey  // Set icon color
-                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }
@@ -387,8 +500,8 @@ MainView {
             ListView {
                 id: optionsView1
                 model: optionsModel1
-                width: parent.width
-                height: optionsModel1.count * units.gu(6)
+                Layout.fillWidth: true
+                Layout.preferredHeight: optionsModel1.count * units.gu(6)
                 clip: true
                 interactive: false            // disables flick/drag
                 boundsBehavior: Flickable.StopAtBounds
@@ -423,13 +536,41 @@ MainView {
                         }
                         name: "toolkit_chevron-ltr_1gu"
                         color: LomiriColors.warmGrey  // Set icon color
-                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
             }
 
             Item {
                 Layout.fillHeight: true
+            }
+
+            Button {
+                visible: !root.is_latest
+                enabled: !root.is_latest
+                color: theme.palette.normal.positive
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                text: i18n.tr("Update Channels")
+                onClicked: {
+                    root.update_channels_latest();
+                }
+            }
+
+            Label {
+                id: outdatedLabel
+                visible: root.channels_outdated
+                enabled: root.channels_outdated
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                text: i18n.tr("Consider updating your channels.")
+                font.bold: true;
+                elide: Text.ElideRight
+                wrapMode: Text.WordWrap
+            }
+
+            Item {
+                Layout.fillHeight: true
+                visible: !root.is_latest
+                enabled: !root.is_latest
             }
         }
 

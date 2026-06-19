@@ -3,7 +3,7 @@ msgid "About"
 msgstr ""
 
 #: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:247
-#: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:220
+#: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:228
 #: ../qml/Generations.qml:140 ../qml/Installed_packages.qml:75
 msgid "Back"
 msgstr ""
@@ -124,15 +124,15 @@ msgstr ""
 
 #: ../qml/Advanced_Settings.qml:488 ../qml/Advanced_Settings.qml:505
 #: ../qml/Apply_changes.qml:565 ../qml/Apply_changes.qml:582
-#: ../qml/Channels.qml:479 ../qml/Channels.qml:496 ../qml/Generations.qml:411
+#: ../qml/Channels.qml:489 ../qml/Channels.qml:506 ../qml/Generations.qml:411
 #: ../qml/Generations.qml:428 ../qml/Installed_packages.qml:267
-#: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:421 ../qml/Setup.qml:438
+#: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:456 ../qml/Setup.qml:473
 msgid "Copy to Clipboard"
 msgstr ""
 
 #: ../qml/Advanced_Settings.qml:492 ../qml/Apply_changes.qml:569
-#: ../qml/Channels.qml:483 ../qml/Generations.qml:415
-#: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:425
+#: ../qml/Channels.qml:493 ../qml/Generations.qml:415
+#: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:460
 msgid "Copied!"
 msgstr ""
 
@@ -186,7 +186,7 @@ msgid "Removing packages, please wait."
 msgstr ""
 
 #: ../qml/Apply_changes.qml:494 ../qml/Apply_changes.qml:504
-#: ../qml/Setup.qml:361 ../qml/Setup.qml:371
+#: ../qml/Setup.qml:396 ../qml/Setup.qml:406
 msgid "placeholder"
 msgstr ""
 
@@ -206,27 +206,27 @@ msgstr ""
 msgid "Updating channels, please wait."
 msgstr ""
 
-#: ../qml/Channels.qml:216
+#: ../qml/Channels.qml:224
 msgid "Channels"
 msgstr ""
 
-#: ../qml/Channels.qml:300
+#: ../qml/Channels.qml:306
 msgid "Removing channel, please wait."
 msgstr ""
 
-#: ../qml/Channels.qml:347
+#: ../qml/Channels.qml:357
 msgid "Protected channel."
 msgstr ""
 
-#: ../qml/Channels.qml:362
+#: ../qml/Channels.qml:372
 msgid "Add"
 msgstr ""
 
-#: ../qml/Channels.qml:374
+#: ../qml/Channels.qml:384
 msgid "Update"
 msgstr ""
 
-#: ../qml/Channels.qml:408 ../qml/Generations.qml:340
+#: ../qml/Channels.qml:418 ../qml/Generations.qml:340
 msgid "Deleting Generation, please wait."
 msgstr ""
 
@@ -266,11 +266,11 @@ msgstr ""
 msgid "Installed packages"
 msgstr ""
 
-#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:562
+#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:701
 msgid "Marked for removal"
 msgstr ""
 
-#: ../qml/Main.qml:172 ../qml/Main.qml:230 ../qml/Setup.qml:96
+#: ../qml/Main.qml:272 ../qml/Main.qml:329 ../qml/Setup.qml:96
 msgid "Nix Manager"
 msgstr ""
 
@@ -279,13 +279,13 @@ msgstr ""
 # This file is distributed under the same license as the nixmanager.chromiumos-guy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../qml/Main.qml:219 ../qml/Main.qml:228
+#: ../qml/Main.qml:318 ../qml/Main.qml:327
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: nixmanager.chromiumos-guy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-12-08 17:27+0000\n"
+"POT-Creation-Date: 2026-06-19 14:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,35 +294,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:257
+#: ../qml/Main.qml:357
+msgid "your channels (NIX: "
+msgstr ""
+
+#: ../qml/Main.qml:372
 msgid "home-manager\n"
 msgstr ""
 
-#: ../qml/Main.qml:265
+#: ../qml/Main.qml:380
 msgid "Nix Generation "
 msgstr ""
 
-#: ../qml/Main.qml:275
+#: ../qml/Main.qml:390
 msgid " pending changes"
 msgstr ""
 
-#: ../qml/Main.qml:319
+#: ../qml/Main.qml:433
 msgid "Management:"
 msgstr ""
 
-#: ../qml/Main.qml:377
+#: ../qml/Main.qml:490
 msgid "Settings:"
 msgstr ""
 
-#: ../qml/Main.qml:485
+#: ../qml/Main.qml:552
+msgid "Update Channels"
+msgstr ""
+
+#: ../qml/Main.qml:562
+msgid "Consider updating your channels."
+msgstr ""
+
+#: ../qml/Main.qml:624
 msgid "Search results: "
 msgstr ""
 
-#: ../qml/Main.qml:562
+#: ../qml/Main.qml:701
 msgid "Marked for installation"
 msgstr ""
 
-#: ../qml/Main.qml:562
+#: ../qml/Main.qml:701
 msgid "Unknown State"
 msgstr ""
 
@@ -348,37 +360,31 @@ msgid ""
 "application."
 msgstr ""
 
-#: ../qml/Setup.qml:166
+#: ../qml/Setup.qml:168
 msgid "Please Choose a Channel:"
 msgstr ""
 
-#: ../qml/Setup.qml:219
+#: ../qml/Setup.qml:227
 msgid "Stable, well tested, good for beginners and experienced users alike."
 msgstr ""
 
-#: ../qml/Setup.qml:229
-msgid ""
-"Unstable, bleeding edge, riddled with bugs not recommended for beginners. "
-"may not work."
-msgstr ""
-
-#: ../qml/Setup.qml:239
+#: ../qml/Setup.qml:237
 msgid "Other, for testing. Only use if you know what you're doing!"
 msgstr ""
 
-#: ../qml/Setup.qml:248
+#: ../qml/Setup.qml:246 ../qml/Setup.qml:283
 msgid "Please specify..."
 msgstr ""
 
-#: ../qml/Setup.qml:287
-msgid "Channel: "
+#: ../qml/Setup.qml:322
+msgid "Nix Channel: "
 msgstr ""
 
-#: ../qml/Setup.qml:296
+#: ../qml/Setup.qml:331
 msgid "Install nix/home manager"
 msgstr ""
 
-#: ../qml/Setup.qml:324
+#: ../qml/Setup.qml:359
 msgid ""
 "Installing nix and home manager, this may take a few minutes — please wait."
 msgstr ""

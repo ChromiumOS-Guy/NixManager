@@ -54,8 +54,10 @@ namespace SetupNixHomeManager {
     * - Calls SetupCurlXz::remove_curlxz(extraction_path) to clean temporary files.
     * - Aggregates stdout/stderr from each step into returned vectors.
     *
-    * @param version The NixOS release version string to target (e.g., "25.05").
-    *                If empty, the function uses the default/unstable flow.
+    * @param nix_version The NixOS release version string to target (e.g., "25.05").
+    *                If empty, func returns error
+    * @param hw_version The HomeManager release version string to target (e.g., "25.05").
+    *                If empty, func returns error
     * @return std::tuple<bool, QStringList, QStringList>
     *   - first: overall success of the shell command (true if the install command
     *     succeeded; false otherwise). Note: failures in provisioning cause
@@ -66,7 +68,7 @@ namespace SetupNixHomeManager {
     *     added contextual error messages (e.g., failures to install or clean temp files).
     */
     std::tuple<bool, QStringList, QStringList>
-    install_nix_home_manager(const QString& version);
+    install_nix_home_manager(const QString& nix_version, const QString& hm_version);
 
     /**
     * @brief Uninstalls Nix and Home Manager from the user system.

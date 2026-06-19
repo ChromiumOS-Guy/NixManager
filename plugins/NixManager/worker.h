@@ -46,7 +46,7 @@ public slots:
     void delete_old_generations(const QVariant& requestId, const QString& operation);
     void hm_expire_generations(const QString& timestamp, const QVariant& requestId, const QString& operation);
     void hm_list_generations(const QVariant& requestId, const QString& operation);
-    void install_nix_home_manager(const QString& version, const QVariant& requestId, const QString& operation);
+    void install_nix_home_manager(const QString& nix_version, const QString& hw_version, const QVariant& requestId, const QString& operation);
     void uninstall_nix_home_manager(const QVariant& requestId, const QString& operation);
     void detect_nix_home_manager(const QVariant& requestId, const QString& operation);
 

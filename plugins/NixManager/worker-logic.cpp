@@ -132,13 +132,13 @@ QString WorkerLogic::hm_list_generations_sync()
 }
 
 // setup-nix bash scripts function handels for QT GUI.
-QString WorkerLogic::install_nix_home_manager_sync(const QString& version)
+QString WorkerLogic::install_nix_home_manager_sync(const QString& nix_version, const QString& hw_version)
 {
     QStringList output;
     QStringList full_error;
     bool success = true;
 
-    std::tie(success, output, full_error) = SetupNixHomeManager::install_nix_home_manager(version);
+    std::tie(success, output, full_error) = SetupNixHomeManager::install_nix_home_manager(nix_version, hw_version);
 
     QJsonObject resultObj;
     resultObj["success"] = success;

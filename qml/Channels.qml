@@ -191,6 +191,14 @@ Page {
                             channelList.enabled = true;
                             loadingbar.visible = false;
                             loadingbar.enabled = false;
+                            if (root.channels_outdated == true) {
+                                root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+                                NixManagerPlugin.request_hm_switch(root.currentRequestId, root.allow_insecure_pakcages);
+                            }
+                        } else if (operation == "hm_switch") {
+                            if (root.channels_outdated) {
+                                root.hide_outdated_label();
+                            }
                         }
                         
                     } else {
@@ -263,8 +271,6 @@ Page {
             }
         }
 
-
-
         // Clickable list
         ListView {
             Layout.fillWidth: true
@@ -321,11 +327,15 @@ Page {
                     width: parent.width
                     //x: parent.swipe.leftItem != null ? (swipe.position * parent.swipe.leftItem.width) : this.x
 
+                    
+
                     Label {
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHRight
-                        text: model.name
+                        text: (model.name == "nixpkgs" || model.name == "home-manager") && !root.is_latest 
+                                ? model.name + " (Out of Date)" 
+                                : model.name
                         font.bold: true
                         elide: Text.ElideRight
                         wrapMode: Text.WordWrap

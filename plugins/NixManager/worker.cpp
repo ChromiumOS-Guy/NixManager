@@ -103,9 +103,9 @@ void Worker::hm_list_generations(const QVariant& requestId, const QString& opera
     WORKER_LOGIC_SLOT(hm_list_generations_sync, requestId, operation, ());
 }
 
-void Worker::install_nix_home_manager(const QString& version, const QVariant& requestId, const QString& operation)
+void Worker::install_nix_home_manager(const QString& nix_version, const QString& hw_version, const QVariant& requestId, const QString& operation)
 {
-    WORKER_LOGIC_SLOT(install_nix_home_manager_sync, requestId, operation, (version));
+    WORKER_LOGIC_SLOT(install_nix_home_manager_sync, requestId, operation, (nix_version, hw_version));
 }
 
 void Worker::uninstall_nix_home_manager(const QVariant& requestId, const QString& operation)

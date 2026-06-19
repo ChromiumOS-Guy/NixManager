@@ -23,7 +23,7 @@
 
 namespace SetupNixHomeManager {
     std::tuple<bool, QStringList, QStringList>
-    install_nix_home_manager(const QString& version) { // command is directly copied from here: https://gitlab.com/tuxecure/crackle-apt/crackle/-/blob/v0.5.4.1/lib/setupfunc#L86 though it is modifed.
+    install_nix_home_manager(const QString& nix_version, const QString& hm_version) { // command is directly copied from here: https://gitlab.com/tuxecure/crackle-apt/crackle/-/blob/v0.5.4.1/lib/setupfunc#L86 though it is modifed.
 
         // Initialize the lists for output and full error
         QStringList output;
@@ -34,7 +34,7 @@ namespace SetupNixHomeManager {
         bool success;
         bool command_success;
         
-        if (version != QString()) { // set command based on if we want to choose a specific release or use unstable channel for eveything.
+        if (nix_version != QString() && hm_version != QString()) { // set command based on a choosen specific release.
             command = QStringLiteral(R"(/bin/bash <<'EOF'
 source $HOME/.profile
 check_cmd() {
@@ -47,28 +47,15 @@ if ! check_cmd nix; then
     nix-channel --update
 fi
 if ! check_cmd home-manager; then
-    nix-channel --add https://github.com/nix-community/home-manager/archive/release-%1.tar.gz home-manager
+    nix-channel --add https://github.com/nix-community/home-manager/archive/release-%2.tar.gz home-manager
     nix-channel --update
     nix-shell '<home-manager>' -A install
 fi
-EOF)").arg(version);
-        } else { // modification here is hardcoded to urls that are dynamic as in, unstable channel is not specified version so likely-hood of change is low.
-            command = QStringLiteral(R"(/bin/bash  <<'EOF'
-source $HOME/.profile
-check_cmd() {
-    command -v "$1" > /dev/null 2>&1
-}
-if ! check_cmd nix; then
-    sh <(curl --proto '=https' --tlsv1.2 -L https://nixos.org/nix/install) --no-daemon;
-    . $HOME/.nix-profile/etc/profile.d/nix.sh
-    nix-channel --update
-fi
-if ! check_cmd home-manager; then
-    sudo nix-channel --add https://github.com/nix-community/home-manager/archive/master.tar.gz home-manager
-    nix-channel --update
-    nix-shell '<home-manager>' -A install
-fi
-EOF)");
+EOF)").arg(nix_version, hm_version);
+        } else { // if no version is specified return error
+            success = false;
+            error = QStringList(QStringLiteral("no version specfied cannot install a none-specfied channel"));
+            full_error = QStringList(QStringLiteral("either the home_manager (%1) or nix_manager (%2) version are invalid!").arg(hm_version, nix_version));
         }
 
         // std::tie(success, output, error) = SetupCurlXz::install_curlxz(extraction_path);

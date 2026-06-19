@@ -26,13 +26,13 @@ import NixManagerPlugin 1.0
 Page {
     id: setupPage
 
-    function handleinstallrequest(version) {
+    function handleinstallrequest(nix_version, hw_version) {
     
         optionfield.visible = false; // hide UI
         optionfield.enabled = false;
 
         root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-        NixManagerPlugin.request_install_nix_home_manager(root.currentRequestId, version); // start install
+        NixManagerPlugin.request_install_nix_home_manager(root.currentRequestId, nix_version, hw_version); // start install
 
         loadingbar.visible = true; // start loading animation
         loadingbar.enabled = true;
@@ -154,9 +154,11 @@ Page {
             right: parent.right
             bottom: parent.bottom
         }
-
-        property string selectedValue: "25.05"
-        property string selectedLabel: "25.05"
+        
+        property string selectedChoiceValue: "latest";
+        property string selectedValue_nix: latest_nix;
+        property string selectedValue_hw: latest_hw;
+        property string selectedLabel: "latest stable release";
 
         Label {
             Layout.alignment: Qt.AlignHCenter
@@ -168,9 +170,8 @@ Page {
 
         ListModel {
             id: optionsModel
-            ListElement { label: "25.05"; value: "25.05" }
-            ListElement { label: "Unstable"; value: "" }
-            ListElement { label: "Other";    value: "other" }
+            ListElement { label: "latest stable release"; value: "latest" }
+            ListElement { label: "Other"; value: "other" }
         }
 
         ListView {
@@ -197,7 +198,14 @@ Page {
                 MouseArea { anchors.fill: parent
                     onClicked: {
                         if (optionfield) {
-                            optionfield.selectedValue = value
+                            if (value == "latest") {
+                                optionfield.selectedValue_nix = root.latest_nix;
+                                optionfield.selectedValue_hw = root.latest_hw;
+                            } else {
+                                optionfield.selectedValue_nix = value;
+                                optionfield.selectedValue_hw = value;
+                            }
+                            optionfield.selectedChoiceValue = value;
                             optionfield.selectedLabel = label
                         }
                     }
@@ -217,17 +225,7 @@ Page {
             wrapMode: Text.WordWrap
             Layout.preferredWidth: parent.width * 0.9
             text: i18n.tr("Stable, well tested, good for beginners and experienced users alike.")
-            visible: optionfield.selectedLabel === "25.05"
-            enabled: visible
-        }
-
-        Label {
-            Layout.alignment: Qt.AlignHCenter
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.WordWrap
-            Layout.preferredWidth: parent.width * 0.9
-            text: i18n.tr("Unstable, bleeding edge, riddled with bugs not recommended for beginners. may not work.")
-            visible: optionfield.selectedLabel === "Unstable"
+            visible: optionfield.selectedLabel === "latest stable release"
             enabled: visible
         }
 
@@ -271,9 +269,46 @@ Page {
                     text = lastValid; // revert invalid input
                 }
                 if (isFinalValid()) {
-                    optionfield.selectedValue = text;
+                    optionfield.selectedValue_nix = text;
                 } else {
-                    optionfield.selectedValue = "other";
+                    optionfield.selectedValue_nix = "other";
+                }
+            }
+        }
+
+        TextField {
+            Layout.alignment: Qt.AlignHCenter
+            horizontalAlignment: Text.AlignHCenter
+            Layout.preferredWidth: parent.width * 0.9
+            placeholderText: i18n.tr("Please specify...")
+            visible: optionfield.selectedLabel === "Other"
+            enabled: visible
+
+            inputMethodHints: Qt.ImhDigitsOnly
+            // optional inputMask if supported:
+            // inputMask: "99.99"
+
+            property string lastValid: ""
+
+            // final-format regexp: exactly two digits, dot, two digits
+            readonly property var finalRe: /^[0-9]{2}\.[0-9]{2}$/
+            // relaxed regexp for intermediate typing (0–2 digits, optional dot + 0–2 digits)
+            readonly property var relaxRe: /^[0-9]{0,2}(\.[0-9]{0,2})?$/
+
+            // optional helper to check final validity
+            function isFinalValid() { return finalRe.test(text); }
+
+            onTextChanged: {
+                // allow relaxed intermediate input; enforce final format elsewhere (e.g. on accept)
+                if (relaxRe.test(text)) {
+                    lastValid = text;
+                } else {
+                    text = lastValid; // revert invalid input
+                }
+                if (isFinalValid()) {
+                    optionfield.selectedValue_hw = text;
+                } else {
+                    optionfield.selectedValue_hw = "other";
                 }
             }
         }
@@ -284,7 +319,7 @@ Page {
 
         Label {
             Layout.alignment: Qt.AlignHCenter
-            text: i18n.tr("Channel: " + optionfield.selectedLabel) 
+            text: i18n.tr("Nix Channel: " + optionfield.selectedValue_nix + "/HW Channel: " + optionfield.selectedValue_hw)
             horizontalAlignment: Text.AlignHCenter
             elide: Text.ElideRight
             Layout.fillWidth: true
@@ -294,8 +329,8 @@ Page {
             color: theme.palette.normal.positive
             Layout.alignment: Qt.AlignHCenter
             text: i18n.tr("Install nix/home manager")
-            enabled: optionfield.selectedValue != "other" && optionfield.selectedLabel != ""
-            onClicked: {setupPage.handleinstallrequest(optionfield.selectedValue);}
+            enabled: optionfield.selectedLabel != "" && optionfield.selectedValue_nix != "other" && optionfield.selectedValue_hw != "other"
+            onClicked: {setupPage.handleinstallrequest(optionfield.selectedValue_nix,optionfield.selectedValue_hw);}
         }
     }
 
