@@ -177,8 +177,9 @@ Page {
         ListView {
             id: optionsView
             model: optionsModel
-            width: parent.width
-            height: optionsModel.count * units.gu(6)
+            Layout.preferredWidth: parent.width * 0.9
+            Layout.alignment: Qt.AlignHCenter
+            Layout.preferredHeight: optionsModel.count * units.gu(6)
             clip: true
             interactive: false
 

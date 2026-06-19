@@ -27,46 +27,25 @@ import NixManagerPlugin 1.0
 Page {
     id: generationsPage
     property string potential_nix_generation: ""
-    property bool expire_action: false
 
     Component {
         id: dialog
         Dialog {
             id: dialogue
-            title: "placeholder"
-            text: "placeholder"
-
-            Component.onCompleted: {
-                if (expire_action == false) {
-                    this.title = "Delete old generations?";
-                    this.text = "This will delete ALL nix generations except the current one.";
-                } else {
-                    this.title = "Expire old generations?";
-                    this.text = "This will delete ALL home-manager generations older then the allowed timestamp (" + root.expire_generation_timestamp + ").";
-                }
-            }
+            title: "Delete old generations?"
+            text: "This will delete ALL nix generations except the current one."
 
             Button {
                 text: "Delete"
                 color: theme.palette.normal.negative
                 onClicked: {
-                    if (expire_action == false) {
-                        generationList.visible = false;
-                        generationList.enabled = false;
-                        loadingbar.visible = true;
-                        loadingbar.enabled = true;
-                        loadinglabel.text = i18n.tr('Deleting nix generations, please wait.');
-                        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-                        NixManagerPlugin.request_delete_old_generations(root.currentRequestId);
-                    } else {
-                        generationList.visible = false;
-                        generationList.enabled = false;
-                        loadingbar.visible = true;
-                        loadingbar.enabled = true;
-                        loadinglabel.text = i18n.tr('Deleting home-manager generations by timestamp, please wait.');
-                        root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-                        NixManagerPlugin.request_hm_expire_generations(root.currentRequestId, root.expire_generation_timestamp);
-                    }
+                    generationList.visible = false;
+                    generationList.enabled = false;
+                    loadingbar.visible = true;
+                    loadingbar.enabled = true;
+                    loadinglabel.text = i18n.tr('Deleting nix generations, please wait.');
+                    root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+                    NixManagerPlugin.request_delete_old_generations(root.currentRequestId);
                     PopupUtils.close(dialogue)
                 }
             }
@@ -108,7 +87,7 @@ Page {
                             generationList.enabled = true;
                             loadingbar.visible = false;
                             loadingbar.enabled = false;
-                        } else if (operation == "hm_expire_generations" || operation == "delete_old_generations") {
+                        } else if (operation == "delete_old_generations") {
                             root.currentRequestId = "VERSION_REQUEST_" + Date.now();
                             NixManagerPlugin.request_list_generations(root.currentRequestId);
                         }
@@ -140,6 +119,16 @@ Page {
                 text: i18n.tr('Back')
                 iconName: 'toolkit_chevron-rtl_1gu'
                 onTriggered: root.popPage()
+            }
+        ]
+
+        trailingActionBar.actions: [
+            Action {
+                text: i18n.tr('Delete old')
+                iconName: 'delete'
+                onTriggered: {
+                    PopupUtils.open(dialog);
+                }
             }
         ]
     }
@@ -283,34 +272,6 @@ Page {
                     }
                 }
             }
-        }
-
-        RowLayout {
-            Item { Layout.fillWidth: true }
-
-            Button {
-                color: theme.palette.normal.negative
-                Layout.alignment: Qt.AlignVCenter
-                text: i18n.tr("Delete old")
-                onClicked: {
-                    expire_action = false;
-                    PopupUtils.open(dialog);
-                } // open popup to confirm apply.
-            }
-
-            Item { Layout.fillWidth: true }
-
-            Button {
-                color: theme.palette.normal.negative
-                Layout.alignment: Qt.AlignVCenter
-                text: i18n.tr("Expire by timestamp")
-                onClicked: {
-                    expire_action = true;
-                    PopupUtils.open(dialog);
-                } // open popup to confirm apply.
-            }
-
-            Item { Layout.fillWidth: true }
         }
     }
 

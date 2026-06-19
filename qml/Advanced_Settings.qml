@@ -26,7 +26,6 @@ import NixManagerPlugin 1.0
 
 Page {
     id: advancedsettingsPage
-    property bool timestamp_action: false
     property bool uninstall_action: false
     property bool search_settings: false
     property bool do_insecure_packages: false
@@ -38,10 +37,9 @@ Page {
             title: "placeholder"
             text: "placeholder"
 
-            property string timestamp: ""
-            property string timeout: ""
-            property string url: ""
-            property bool local_search: false
+            property string timeout: String(root.api_timeout)
+            property string url: root.search_api_url
+            property bool local_search: root.enable_local_search
 
             Component.onCompleted: {
                 if (uninstall_action == true) {
@@ -50,9 +48,6 @@ Page {
                 } else if (do_insecure_packages == true) {
                     this.title = "Allow insecure packages?";
                     this.text = "This will allow insecure packages (packages with CVE vulnerabilities). \n\nThis action is irreversible — to restore the previous state you must reinstall Nix which will disable this setting.";
-                } else if (timestamp_action == true) {
-                    this.title = "Change timestamp?";
-                    this.text = "This will change the timestamp used to expire generations.";
                 } else if (search_settings == true) {
                     this.title = "Search settings.";
                     this.text = "Search settings, only use if you know what these terms mean. \n Fair Warning local search is extremly resource intesive and may even crash on weaker phones like OnePlus Nord N100.";
@@ -71,6 +66,7 @@ Page {
                     wrapMode: Text.WordWrap
                 }
                 TextField {
+                    id: urlField
                     text: url
                     Layout.fillWidth: true
                     property string lastValid: ""
@@ -85,32 +81,28 @@ Page {
                     onTextChanged: {
                         if (relaxRewhitespace.test(text)) {
                             lastValid = text;
+                            url = text;   // commit live so Apply works without pressing Enter
                         } else {
                             // revert to previous valid value if the new text contains whitespace
                             text = lastValid;
                         }
                     }
-                    onAccepted: {
-                        if (relaxRe.test(text)) {
-                            url = text.replace(/\s+/g, "") // final sanitize just in case
-                        }
-                    }
                 }
             }
 
-            // Timestamp/Timeout row
+            // Timeout row
             RowLayout {
-                visible: timestamp_action || (search_settings && local_search == false)
-                enabled: timestamp_action || (search_settings && local_search == false)
+                visible: (search_settings && local_search == false)
+                enabled: (search_settings && local_search == false)
                 spacing: units.gu(1)
                 Label {
-                    text: timestamp_action == true ? i18n.tr("New timestamp (in days):") : i18n.tr("New timeout (in seconds):")
+                    text: i18n.tr("New timeout (in seconds):")
                     Layout.alignment: Qt.AlignVCenter
                     Layout.preferredWidth: parent.width * 0.35
                     wrapMode: Text.WordWrap
                 }
                 TextField {
-                    text: timestamp
+                    text: timeout
                     Layout.fillWidth: true
                     property string lastValid: ""
                     // only digits 0-9, allow empty string while typing
@@ -119,9 +111,7 @@ Page {
                     onTextChanged: {
                         if (relaxRe.test(text)) {
                             lastValid = text;
-                            if (timestamp_action == true) {timestamp = text.replace(/\D+/g, "");}
-                            if (search_settings == true) {timeout = text.replace(/\D+/g, "");}
-                            
+                            timeout = text.replace(/\D+/g, "");
                         } else {
                             text = lastValid
                         }
@@ -130,9 +120,8 @@ Page {
                     onAccepted: {
                         if (relaxRe.test(text)) {
                             // final sanitize: remove non-digits
-                            if (timestamp_action == true) {timestamp = text.replace(/\D+/g, "");}
-                            if (search_settings == true) {timeout = text.replace(/\D+/g, "");}
-                        } 
+                            timeout = text.replace(/\D+/g, "");
+                        }
                     }
                 }
             }
@@ -155,14 +144,12 @@ Page {
             }
 
             Button {
-                text: timestamp_action == true ? "Change" : uninstall_action == true ? "Uninstall" : do_insecure_packages == true ? "Allow" : search_settings == true ? "Apply" : "Unknown"
+                text: uninstall_action == true ? "Uninstall" : do_insecure_packages == true ? "Allow" : search_settings == true ? "Apply" : "Unknown"
                 color: uninstall_action == false ? theme.palette.normal.positive : theme.palette.normal.negative
-                enabled: (timestamp != "" && timestamp_action == true) || do_insecure_packages == true || uninstall_action == true || search_settings == true
+                enabled: do_insecure_packages == true || uninstall_action == true || search_settings == true
                 onClicked: {
                     if (do_insecure_packages == true) {
                         root.allow_insecure_pakcages = true;
-                    } else if (timestamp_action == true) {
-                        root.expire_generation_timestamp = "-" + timestamp + " days"
                     } else if (uninstall_action == true) {
                         root.currentRequestId = "VERSION_REQUEST_" + Date.now();
                         NixManagerPlugin.request_uninstall_nix_home_manager(root.currentRequestId);
@@ -171,9 +158,9 @@ Page {
                         loadingbar.visible = true;
                         loadingbar.enabled = true;
                     } else if (search_settings == true) {
-                        if (timeout != "") {root.api_timeout = timeout;}
-                        if (url != "") {root.search_api_url =  url;}
-                        if (local_search != "") {root.enable_local_search = local_search;}
+                        if (timeout != "") {root.api_timeout = parseInt(timeout);}
+                        if (url != "" && urlField.relaxRe.test(url)) {root.search_api_url = url;}
+                        root.enable_local_search = local_search;
                     }
                     PopupUtils.close(dialogue)
                 }
@@ -181,12 +168,13 @@ Page {
 
             Button {
                 text: "Reset"
-                enabled: timestamp_action == true || (search_settings == true && (enable_local_search != false || search_api_url != "https://search.devbox.sh" || api_timeout != 10))
-                visible: (timestamp_action == true && root.expire_generation_timestamp != "-30 days") || (search_settings == true && (enable_local_search != false || search_api_url != "https://search.devbox.sh" || api_timeout != 10))
+                enabled: search_settings == true && (enable_local_search != false || search_api_url != "https://search.devbox.sh" || api_timeout != 10)
+                visible: search_settings == true && (enable_local_search != false || search_api_url != "https://search.devbox.sh" || api_timeout != 10)
                 onClicked: {
-                    if (timestamp_action == true) {root.expire_generation_timestamp = "-30 days";}
                     if (search_settings == true) {
-                        root.popPage()
+                        root.enable_local_search = false;
+                        root.search_api_url = "https://search.devbox.sh";
+                        root.api_timeout = 10;
                     }
                     PopupUtils.close(dialogue)
                 }
@@ -285,109 +273,150 @@ Page {
             // }
             width: parent.width
 
-            Label {
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-                Layout.preferredWidth: parent.width * 0.9
-                text: i18n.tr('Adjusts the timestamp that determines when old home-manager generations expire. \nThe default of one month is sufficient for most users; change this only if you have a specific requirement (for example, longer retention for debugging or shorter retention to conserve disk space).')
-            }
-
-            Button {
-                Layout.alignment: Qt.AlignHCenter
-                text: i18n.tr("Change timestamp")
+            ListItem {
+                Layout.fillWidth: true
+                Layout.preferredHeight: Math.max(searchCol.height + units.gu(4), units.gu(7))
                 onClicked: {
                     uninstall_action = false;
-                    timestamp_action = true;
-                    search_settings = false;
-                    do_insecure_packages = false;
-                    PopupUtils.open(dialog);
-                } // open popup to confirm apply.
-            }
-
-            Item {
-                Layout.fillHeight: true
-            }
-
-            Label {
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-                Layout.preferredWidth: parent.width * 0.9
-                text: i18n.tr('Modifying search settings is not recommended unless you understand the implications. \nIncorrect changes can break search functionality or cause unexpected behavior. \nOnly adjust these settings if you are familiar with the relevant APIs and confident in troubleshooting any issues that arise.')
-            }
-
-            Label {
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-                Layout.preferredWidth: parent.width * 0.9
-                text: i18n.tr('Current values are: \n enable_local_search = ' + (root.enable_local_search == true ? "true" : " false") + "\n api_timeout (s) = " + String(root.api_timeout) + "\n search_api_url = " + root.search_api_url)
-            }
-
-            Button {
-                Layout.alignment: Qt.AlignHCenter
-                text: i18n.tr("Open search settings")
-                onClicked: {
-                    uninstall_action = false; 
-                    timestamp_action = false;
                     search_settings = true;
                     do_insecure_packages = false;
                     PopupUtils.open(dialog);
-                } // open popup to confirm apply.
+                }
+
+                Column {
+                    id: searchCol
+                    spacing: units.gu(0.5)
+                    anchors {
+                        left: parent.left
+                        right: searchChevron.left
+                        top: parent.top
+                        margins: units.gu(2)
+                    }
+
+                    Label {
+                        width: parent.width
+                        text: i18n.tr("Search settings")
+                        font.bold: true
+                        wrapMode: Text.WordWrap
+                    }
+                    Label {
+                        width: parent.width
+                        color: theme.palette.normal.base
+                        wrapMode: Text.WordWrap
+                        text: i18n.tr('Modifying search settings is not recommended unless you understand the implications. \nIncorrect changes can break search functionality or cause unexpected behavior. \nOnly adjust these settings if you are familiar with the relevant APIs and confident in troubleshooting any issues that arise.') +
+                              i18n.tr('\n\nCurrent values are: \n enable_local_search = ' + (root.enable_local_search == true ? "true" : "false") + "\n api_timeout (s) = " + String(root.api_timeout) + "\n search_api_url = " + root.search_api_url)
+                    }
+                }
+
+                Icon {
+                    id: searchChevron
+                    width: units.gu(2)
+                    anchors {
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        rightMargin: units.gu(2)
+                    }
+                    name: "toolkit_chevron-ltr_1gu"
+                    color: LomiriColors.warmGrey
+                }
             }
 
-            Item {
-                Layout.fillHeight: true
-            }
-
-            Label {
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-                Layout.preferredWidth: parent.width * 0.9
-                text: i18n.tr('Allowing insecure packages is strongly discouraged. \nThis may expose your system to known vulnerabilities, malware, or data loss. \nIf you enable it, packages with unresolved CVEs or weakened integrity checks can be installed. \nThis change is difficult to reverse — to fully restore safety you will need to reinstall Nix and Home Manager which will re-disable this option. \nProceed only if you understand and accept the security risks.')
-            }
-
-            Button {
+            ListItem {
+                Layout.fillWidth: true
+                Layout.preferredHeight: Math.max(insecureCol.height + units.gu(4), units.gu(7))
                 enabled: root.allow_insecure_pakcages == false
-                color: theme.palette.normal.positive
-                Layout.alignment: Qt.AlignHCenter
-                text: i18n.tr("Allow insecure packages")
                 onClicked: {
                     uninstall_action = false;
-                    timestamp_action = false;
                     search_settings = false;
                     do_insecure_packages = true;
                     PopupUtils.open(dialog);
-                } // open popup to confirm apply.
+                }
+
+                Column {
+                    id: insecureCol
+                    spacing: units.gu(0.5)
+                    anchors {
+                        left: parent.left
+                        right: insecureChevron.left
+                        top: parent.top
+                        margins: units.gu(2)
+                    }
+
+                    Label {
+                        width: parent.width
+                        text: i18n.tr("Allow insecure packages")
+                        font.bold: true
+                        color: theme.palette.normal.negative
+                        wrapMode: Text.WordWrap
+                    }
+                    Label {
+                        width: parent.width
+                        color: theme.palette.normal.base
+                        wrapMode: Text.WordWrap
+                        text: i18n.tr('Allowing insecure packages is strongly discouraged. \nThis may expose your system to known vulnerabilities, malware, or data loss. \nIf you enable it, packages with unresolved CVEs or weakened integrity checks can be installed. \nThis change is difficult to reverse — to fully restore safety you will need to reinstall Nix and Home Manager which will re-disable this option. \nProceed only if you understand and accept the security risks.')
+                    }
+                }
+
+                Icon {
+                    id: insecureChevron
+                    width: units.gu(2)
+                    anchors {
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        rightMargin: units.gu(2)
+                    }
+                    name: "toolkit_chevron-ltr_1gu"
+                    color: LomiriColors.warmGrey
+                }
             }
 
-            Item {
-                Layout.fillHeight: true
-            }
-
-            Label {
-                Layout.alignment: Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                wrapMode: Text.WordWrap
-                Layout.preferredWidth: parent.width * 0.9
-                text: i18n.tr('This will uninstall Nix and Home Manager, removing all packages and configurations installed through them. \nUser data and system-wide files outside Nix may not be affected, but any software managed by Nix/Home Manager will be deleted. \nEnsure you have backups of important nix/home-manager managed data before proceeding.')
-            }
-
-            Button {
-                color: theme.palette.normal.negative
-                Layout.alignment: Qt.AlignHCenter
-                text: i18n.tr("Uninstall nix/home-manager")
+            ListItem {
+                Layout.fillWidth: true
+                Layout.preferredHeight: Math.max(uninstallCol.height + units.gu(4), units.gu(7))
                 onClicked: {
                     uninstall_action = true;
-                    timestamp_action = false;
                     search_settings = false;
                     do_insecure_packages = false;
                     PopupUtils.open(dialog);
-                } // open popup to confirm apply.
-            }
+                }
 
+                Column {
+                    id: uninstallCol
+                    spacing: units.gu(0.5)
+                    anchors {
+                        left: parent.left
+                        right: uninstallChevron.left
+                        top: parent.top
+                        margins: units.gu(2)
+                    }
+
+                    Label {
+                        width: parent.width
+                        text: i18n.tr("Uninstall nix/home-manager")
+                        font.bold: true
+                        color: theme.palette.normal.negative
+                        wrapMode: Text.WordWrap
+                    }
+                    Label {
+                        width: parent.width
+                        color: theme.palette.normal.base
+                        wrapMode: Text.WordWrap
+                        text: i18n.tr('This will uninstall Nix and Home Manager, removing all packages and configurations installed through them. \nUser data and system-wide files outside Nix may not be affected, but any software managed by Nix/Home Manager will be deleted. \nEnsure you have backups of important nix/home-manager managed data before proceeding.')
+                    }
+                }
+
+                Icon {
+                    id: uninstallChevron
+                    width: units.gu(2)
+                    anchors {
+                        right: parent.right
+                        verticalCenter: parent.verticalCenter
+                        rightMargin: units.gu(2)
+                    }
+                    name: "toolkit_chevron-ltr_1gu"
+                    color: LomiriColors.warmGrey
+                }
+            }
         }
     }
 

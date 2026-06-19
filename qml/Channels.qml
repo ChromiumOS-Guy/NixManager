@@ -187,18 +187,16 @@ Page {
                             loadingbar.visible = false;
                             loadingbar.enabled = false;
                         } else if (operation == "update_channels") {
-                            channelList.visible = true;
-                            channelList.enabled = true;
-                            loadingbar.visible = false;
-                            loadingbar.enabled = false;
-                            if (root.channels_outdated == true) {
-                                root.currentRequestId = "VERSION_REQUEST_" + Date.now();
-                                NixManagerPlugin.request_hm_switch(root.currentRequestId, root.allow_insecure_pakcages);
-                            }
+                            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+                            NixManagerPlugin.request_hm_switch(root.currentRequestId, root.allow_insecure_pakcages);
                         } else if (operation == "hm_switch") {
                             if (root.channels_outdated) {
                                 root.hide_outdated_label();
                             }
+                            channelList.visible = true;
+                            channelList.enabled = true;
+                            loadingbar.visible = false;
+                            loadingbar.enabled = false;
                         }
                         
                     } else {
@@ -228,6 +226,25 @@ Page {
                 text: i18n.tr('Back')
                 iconName: 'toolkit_chevron-rtl_1gu'
                 onTriggered: root.popPage()
+            }
+        ]
+
+        trailingActionBar.actions: [
+            Action {
+                text: i18n.tr('Update')
+                iconName: 'reload'
+                onTriggered: {
+                    update_action = true;
+                    PopupUtils.open(dialog);
+                }
+            },
+            Action {
+                text: i18n.tr('Add')
+                iconName: 'add'
+                onTriggered: {
+                    update_action = false;
+                    PopupUtils.open(dialog);
+                }
             }
         ]
     }
@@ -363,33 +380,6 @@ Page {
             }
         }
 
-        RowLayout {
-            Item { Layout.fillWidth: true }
-
-            Button {
-                color: theme.palette.normal.positive
-                Layout.alignment: Qt.AlignVCenter
-                text: i18n.tr("Add")
-                onClicked: {
-                    update_action = false;
-                    PopupUtils.open(dialog);
-                } // open popup to confirm apply.
-            }
-
-            Item { Layout.fillWidth: true }
-
-            Button {
-                color: theme.palette.normal.positive
-                Layout.alignment: Qt.AlignVCenter
-                text: i18n.tr("Update")
-                onClicked: {
-                    update_action = true;
-                    PopupUtils.open(dialog);
-                } // open popup to confirm apply.
-            }
-
-            Item { Layout.fillWidth: true }
-        }
     }
 
     ColumnLayout {

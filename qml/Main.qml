@@ -122,7 +122,6 @@ MainView {
         property bool enable_local_search: false
         property string search_api_url: "https://search.devbox.sh"
         property int api_timeout: 10
-        property string expire_generation_timestamp: "-30 days"
         property bool channels_outdated: false
     }
 
@@ -130,7 +129,6 @@ MainView {
     property alias enable_local_search: s.enable_local_search
     property alias search_api_url: s.search_api_url
     property alias api_timeout: s.api_timeout
-    property alias expire_generation_timestamp: s.expire_generation_timestamp // expire older then a month
     property bool channels_outdated: s.channels_outdated
 
     function loadQml(path) {
@@ -179,7 +177,6 @@ MainView {
     }
 
     function reset_settings() { //gets called after un/install after if no nix is detected.
-        root.expire_generation_timestamp = "-30 days"
         root.allow_insecure_pakcages = false
         root.enable_local_search = false
         root.search_api_url = "https://search.devbox.sh"

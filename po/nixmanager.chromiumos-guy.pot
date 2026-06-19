@@ -2,9 +2,9 @@
 msgid "About"
 msgstr ""
 
-#: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:247
-#: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:228
-#: ../qml/Generations.qml:140 ../qml/Installed_packages.qml:75
+#: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:235
+#: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:226
+#: ../qml/Generations.qml:119 ../qml/Installed_packages.qml:75
 msgid "Back"
 msgstr ""
 
@@ -35,40 +35,27 @@ msgid ""
 "always enjoyable on phone/tablet form factor."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:68
+#: ../qml/Advanced_Settings.qml:63
 msgid "API url:"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:107
+#: ../qml/Advanced_Settings.qml:99
 msgid "New timeout (in seconds):"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:107
-msgid "New timestamp (in days):"
-msgstr ""
-
-#: ../qml/Advanced_Settings.qml:146
+#: ../qml/Advanced_Settings.qml:135
 msgid "Use local search:"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:243
+#: ../qml/Advanced_Settings.qml:231
 msgid "Advanced settings"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:293
-msgid ""
-"Adjusts the timestamp that determines when old home-manager generations "
-"expire. \n"
-"The default of one month is sufficient for most users; change this only if "
-"you have a specific requirement (for example, longer retention for debugging "
-"or shorter retention to conserve disk space)."
-msgstr ""
-
 #: ../qml/Advanced_Settings.qml:298
-msgid "Change timestamp"
+msgid "Search settings"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:317
+#: ../qml/Advanced_Settings.qml:306
 msgid ""
 "Modifying search settings is not recommended unless you understand the "
 "implications. \n"
@@ -78,17 +65,19 @@ msgid ""
 "confident in troubleshooting any issues that arise."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:325
+#: ../qml/Advanced_Settings.qml:307
 msgid ""
+"\n"
+"\n"
 "Current values are: \n"
 " enable_local_search = "
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:330
-msgid "Open search settings"
+#: ../qml/Advanced_Settings.qml:347
+msgid "Allow insecure packages"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:349
+#: ../qml/Advanced_Settings.qml:356
 msgid ""
 "Allowing insecure packages is strongly discouraged. \n"
 "This may expose your system to known vulnerabilities, malware, or data "
@@ -100,11 +89,11 @@ msgid ""
 "Proceed only if you understand and accept the security risks."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:356
-msgid "Allow insecure packages"
+#: ../qml/Advanced_Settings.qml:395
+msgid "Uninstall nix/home-manager"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:375
+#: ../qml/Advanced_Settings.qml:404
 msgid ""
 "This will uninstall Nix and Home Manager, removing all packages and "
 "configurations installed through them. \n"
@@ -114,25 +103,21 @@ msgid ""
 "proceeding."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:381
-msgid "Uninstall nix/home-manager"
-msgstr ""
-
-#: ../qml/Advanced_Settings.qml:417
+#: ../qml/Advanced_Settings.qml:446
 msgid "Uninstalling nix/home-manager, please wait."
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:488 ../qml/Advanced_Settings.qml:505
+#: ../qml/Advanced_Settings.qml:517 ../qml/Advanced_Settings.qml:534
 #: ../qml/Apply_changes.qml:565 ../qml/Apply_changes.qml:582
-#: ../qml/Channels.qml:489 ../qml/Channels.qml:506 ../qml/Generations.qml:411
-#: ../qml/Generations.qml:428 ../qml/Installed_packages.qml:267
-#: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:456 ../qml/Setup.qml:473
+#: ../qml/Channels.qml:479 ../qml/Channels.qml:496 ../qml/Generations.qml:372
+#: ../qml/Generations.qml:389 ../qml/Installed_packages.qml:267
+#: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:457 ../qml/Setup.qml:474
 msgid "Copy to Clipboard"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:492 ../qml/Apply_changes.qml:569
-#: ../qml/Channels.qml:493 ../qml/Generations.qml:415
-#: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:460
+#: ../qml/Advanced_Settings.qml:521 ../qml/Apply_changes.qml:569
+#: ../qml/Channels.qml:483 ../qml/Generations.qml:376
+#: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:461
 msgid "Copied!"
 msgstr ""
 
@@ -186,7 +171,7 @@ msgid "Removing packages, please wait."
 msgstr ""
 
 #: ../qml/Apply_changes.qml:494 ../qml/Apply_changes.qml:504
-#: ../qml/Setup.qml:396 ../qml/Setup.qml:406
+#: ../qml/Setup.qml:397 ../qml/Setup.qml:407
 msgid "placeholder"
 msgstr ""
 
@@ -206,71 +191,63 @@ msgstr ""
 msgid "Updating channels, please wait."
 msgstr ""
 
-#: ../qml/Channels.qml:224
+#: ../qml/Channels.qml:222
 msgid "Channels"
 msgstr ""
 
-#: ../qml/Channels.qml:306
-msgid "Removing channel, please wait."
-msgstr ""
-
-#: ../qml/Channels.qml:357
-msgid "Protected channel."
-msgstr ""
-
-#: ../qml/Channels.qml:372
-msgid "Add"
-msgstr ""
-
-#: ../qml/Channels.qml:384
+#: ../qml/Channels.qml:234
 msgid "Update"
 msgstr ""
 
-#: ../qml/Channels.qml:418 ../qml/Generations.qml:340
+#: ../qml/Channels.qml:242
+msgid "Add"
+msgstr ""
+
+#: ../qml/Channels.qml:323
+msgid "Removing channel, please wait."
+msgstr ""
+
+#: ../qml/Channels.qml:374
+msgid "Protected channel."
+msgstr ""
+
+#: ../qml/Channels.qml:408 ../qml/Generations.qml:301
 msgid "Deleting Generation, please wait."
 msgstr ""
 
-#: ../qml/Generations.qml:58
+#: ../qml/Generations.qml:46
 msgid "Deleting nix generations, please wait."
 msgstr ""
 
-#: ../qml/Generations.qml:66
-msgid "Deleting home-manager generations by timestamp, please wait."
-msgstr ""
-
-#: ../qml/Generations.qml:136
+#: ../qml/Generations.qml:115
 msgid "Generations"
 msgstr ""
 
-#: ../qml/Generations.qml:224
-msgid "Switching generation, please wait."
-msgstr ""
-
-#: ../qml/Generations.qml:240
-msgid "Deleting generation, please wait."
-msgstr ""
-
-#: ../qml/Generations.qml:278
-msgid "Is current generation"
-msgstr ""
-
-#: ../qml/Generations.qml:294
+#: ../qml/Generations.qml:127
 msgid "Delete old"
 msgstr ""
 
-#: ../qml/Generations.qml:306
-msgid "Expire by timestamp"
+#: ../qml/Generations.qml:213
+msgid "Switching generation, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:229
+msgid "Deleting generation, please wait."
+msgstr ""
+
+#: ../qml/Generations.qml:267
+msgid "Is current generation"
 msgstr ""
 
 #: ../qml/Installed_packages.qml:71
 msgid "Installed packages"
 msgstr ""
 
-#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:701
+#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:700
 msgid "Marked for removal"
 msgstr ""
 
-#: ../qml/Main.qml:272 ../qml/Main.qml:329 ../qml/Setup.qml:96
+#: ../qml/Main.qml:269 ../qml/Main.qml:326 ../qml/Setup.qml:96
 msgid "Nix Manager"
 msgstr ""
 
@@ -279,13 +256,13 @@ msgstr ""
 # This file is distributed under the same license as the nixmanager.chromiumos-guy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../qml/Main.qml:318 ../qml/Main.qml:327
+#: ../qml/Main.qml:315 ../qml/Main.qml:324
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: nixmanager.chromiumos-guy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-19 14:25+0000\n"
+"POT-Creation-Date: 2026-06-19 16:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -294,47 +271,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:357
+#: ../qml/Main.qml:354
 msgid "your channels (NIX: "
 msgstr ""
 
-#: ../qml/Main.qml:372
+#: ../qml/Main.qml:369
 msgid "home-manager\n"
 msgstr ""
 
-#: ../qml/Main.qml:380
+#: ../qml/Main.qml:377
 msgid "Nix Generation "
 msgstr ""
 
-#: ../qml/Main.qml:390
+#: ../qml/Main.qml:387
 msgid " pending changes"
 msgstr ""
 
-#: ../qml/Main.qml:433
+#: ../qml/Main.qml:430
 msgid "Management:"
 msgstr ""
 
-#: ../qml/Main.qml:490
+#: ../qml/Main.qml:487
 msgid "Settings:"
 msgstr ""
 
-#: ../qml/Main.qml:552
+#: ../qml/Main.qml:549
 msgid "Update Channels"
 msgstr ""
 
-#: ../qml/Main.qml:562
+#: ../qml/Main.qml:561
 msgid "Consider updating your channels."
 msgstr ""
 
-#: ../qml/Main.qml:624
+#: ../qml/Main.qml:623
 msgid "Search results: "
 msgstr ""
 
-#: ../qml/Main.qml:701
+#: ../qml/Main.qml:700
 msgid "Marked for installation"
 msgstr ""
 
-#: ../qml/Main.qml:701
+#: ../qml/Main.qml:700
 msgid "Unknown State"
 msgstr ""
 
@@ -364,27 +341,27 @@ msgstr ""
 msgid "Please Choose a Channel:"
 msgstr ""
 
-#: ../qml/Setup.qml:227
+#: ../qml/Setup.qml:228
 msgid "Stable, well tested, good for beginners and experienced users alike."
 msgstr ""
 
-#: ../qml/Setup.qml:237
+#: ../qml/Setup.qml:238
 msgid "Other, for testing. Only use if you know what you're doing!"
 msgstr ""
 
-#: ../qml/Setup.qml:246 ../qml/Setup.qml:283
+#: ../qml/Setup.qml:247 ../qml/Setup.qml:284
 msgid "Please specify..."
 msgstr ""
 
-#: ../qml/Setup.qml:322
+#: ../qml/Setup.qml:323
 msgid "Nix Channel: "
 msgstr ""
 
-#: ../qml/Setup.qml:331
+#: ../qml/Setup.qml:332
 msgid "Install nix/home manager"
 msgstr ""
 
-#: ../qml/Setup.qml:359
+#: ../qml/Setup.qml:360
 msgid ""
 "Installing nix and home manager, this may take a few minutes — please wait."
 msgstr ""
