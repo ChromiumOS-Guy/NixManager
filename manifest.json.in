@@ -9,7 +9,7 @@
             "desktop":  "nixmanager.desktop"
         }
     },
-    "version": "1.3.9",
+    "version": "1.3.10",
     "maintainer": "ChromiumOS-Guy <ChromiumOS-Guy-OpenSource@proton.me>",
     "framework" : "@CLICK_FRAMEWORK@"
 }
