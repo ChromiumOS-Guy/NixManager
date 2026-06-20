@@ -27,6 +27,21 @@ import NixManagerPlugin 1.0
 Page {
     id: applyPage
 
+    // Captured at Apply time so the success label doesn't depend on the
+    // packages_* arrays, which get cleared mid-flow.
+    property bool didDelete: false
+    property bool didInstall: false
+
+    function setSuccessLabel() {
+        if (didDelete && didInstall) {
+            label0.text = i18n.tr('Package deletion/installation successful!');
+        } else if (didInstall) {
+            label0.text = i18n.tr('Package installation successful!');
+        } else {
+            label0.text = i18n.tr('Package deletion successful!');
+        }
+    }
+
     Component {
         id: dialog
         Dialog {
@@ -38,6 +53,8 @@ Page {
                 color: theme.palette.normal.positive
                 onClicked: {
                     PopupUtils.close(dialogue)
+                    applyPage.didDelete = root.packages_to_delete.length > 0;
+                    applyPage.didInstall = root.packages_to_install.length > 0;
                     summery.visible = false;
                     summery.enabled = false;
                     loadingbar.visible = true;
@@ -106,12 +123,7 @@ Page {
                                 loadingbar.enabled = false;
                                 header.leadingActionBar.visible = true;
                                 header.leadingActionBar.enabled = true;
-                                if (root.packages_to_delete.length > 0) {
-                                    label0.text = i18n.tr('Package deletion successful!');
-                                    if (root.packages_to_install.length > 0) {
-                                        label0.text = i18n.tr('Package deletion/installation successful!');
-                                    }
-                                }
+                                applyPage.setSuccessLabel();
                                 label0.color = theme.palette.normal.positive;
                                 reportbtn.visible = false;
                                 reportbtn.enabled = false;
@@ -124,12 +136,7 @@ Page {
                             loadingbar.enabled = false;
                             header.leadingActionBar.visible = true;
                             header.leadingActionBar.enabled = true;
-                            if (root.packages_to_install.length > 0) {
-                                label0.text = i18n.tr('Package installation successful!');
-                                if (root.packages_to_delete.length > 0) {
-                                    label0.text = i18n.tr('Package deletion/installation successful!');
-                                }
-                            }
+                            applyPage.setSuccessLabel();
                             root.packages_to_install = [];
                             label0.color = theme.palette.normal.positive;
                             reportbtn.visible = false;

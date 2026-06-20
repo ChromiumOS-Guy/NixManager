@@ -3,7 +3,7 @@ msgid "About"
 msgstr ""
 
 #: ../qml/About.qml:36 ../qml/Advanced_Settings.qml:235
-#: ../qml/Apply_changes.qml:184 ../qml/Channels.qml:226
+#: ../qml/Apply_changes.qml:191 ../qml/Channels.qml:226
 #: ../qml/Generations.qml:119 ../qml/Installed_packages.qml:75
 msgid "Back"
 msgstr ""
@@ -108,69 +108,69 @@ msgid "Uninstalling nix/home-manager, please wait."
 msgstr ""
 
 #: ../qml/Advanced_Settings.qml:517 ../qml/Advanced_Settings.qml:534
-#: ../qml/Apply_changes.qml:565 ../qml/Apply_changes.qml:582
+#: ../qml/Apply_changes.qml:572 ../qml/Apply_changes.qml:589
 #: ../qml/Channels.qml:479 ../qml/Channels.qml:496 ../qml/Generations.qml:372
 #: ../qml/Generations.qml:389 ../qml/Installed_packages.qml:267
 #: ../qml/Installed_packages.qml:284 ../qml/Setup.qml:457 ../qml/Setup.qml:474
 msgid "Copy to Clipboard"
 msgstr ""
 
-#: ../qml/Advanced_Settings.qml:521 ../qml/Apply_changes.qml:569
+#: ../qml/Advanced_Settings.qml:521 ../qml/Apply_changes.qml:576
 #: ../qml/Channels.qml:483 ../qml/Generations.qml:376
 #: ../qml/Installed_packages.qml:271 ../qml/Setup.qml:461
 msgid "Copied!"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:63 ../qml/Apply_changes.qml:103
-msgid "Installing packages, please wait."
-msgstr ""
-
-#: ../qml/Apply_changes.qml:110
-msgid "Package deletion successful!"
-msgstr ""
-
-#: ../qml/Apply_changes.qml:112 ../qml/Apply_changes.qml:130
+#: ../qml/Apply_changes.qml:37
 msgid "Package deletion/installation successful!"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:128
+#: ../qml/Apply_changes.qml:39
 msgid "Package installation successful!"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:147
+#: ../qml/Apply_changes.qml:41
+msgid "Package deletion successful!"
+msgstr ""
+
+#: ../qml/Apply_changes.qml:80 ../qml/Apply_changes.qml:120
+msgid "Installing packages, please wait."
+msgstr ""
+
+#: ../qml/Apply_changes.qml:154
 msgid "Package deletion failed!"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:149 ../qml/Apply_changes.qml:160
+#: ../qml/Apply_changes.qml:156 ../qml/Apply_changes.qml:167
 #: ../qml/Setup.qml:78
 msgid "Details"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:158
+#: ../qml/Apply_changes.qml:165
 msgid "Package installation failed!"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:180
+#: ../qml/Apply_changes.qml:187
 msgid "Apply changes"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:211
+#: ../qml/Apply_changes.qml:218
 msgid "Packages to install:"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:354
+#: ../qml/Apply_changes.qml:361
 msgid "Packages to remove:"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:428
+#: ../qml/Apply_changes.qml:435
 msgid "Apply"
 msgstr ""
 
-#: ../qml/Apply_changes.qml:457
+#: ../qml/Apply_changes.qml:464
 msgid "Removing packages, please wait."
 msgstr ""
 
-#: ../qml/Apply_changes.qml:494 ../qml/Apply_changes.qml:504
+#: ../qml/Apply_changes.qml:501 ../qml/Apply_changes.qml:511
 #: ../qml/Setup.qml:397 ../qml/Setup.qml:407
 msgid "placeholder"
 msgstr ""
@@ -243,11 +243,11 @@ msgstr ""
 msgid "Installed packages"
 msgstr ""
 
-#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:700
+#: ../qml/Installed_packages.qml:200 ../qml/Main.qml:709
 msgid "Marked for removal"
 msgstr ""
 
-#: ../qml/Main.qml:269 ../qml/Main.qml:326 ../qml/Setup.qml:96
+#: ../qml/Main.qml:278 ../qml/Main.qml:335 ../qml/Setup.qml:96
 msgid "Nix Manager"
 msgstr ""
 
@@ -256,13 +256,13 @@ msgstr ""
 # This file is distributed under the same license as the nixmanager.chromiumos-guy package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#: ../qml/Main.qml:315 ../qml/Main.qml:324
+#: ../qml/Main.qml:324 ../qml/Main.qml:333
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: nixmanager.chromiumos-guy\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-19 16:40+0000\n"
+"POT-Creation-Date: 2026-06-20 06:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -271,47 +271,47 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../qml/Main.qml:354
+#: ../qml/Main.qml:363
 msgid "your channels (NIX: "
 msgstr ""
 
-#: ../qml/Main.qml:369
+#: ../qml/Main.qml:378
 msgid "home-manager\n"
 msgstr ""
 
-#: ../qml/Main.qml:377
+#: ../qml/Main.qml:386
 msgid "Nix Generation "
 msgstr ""
 
-#: ../qml/Main.qml:387
+#: ../qml/Main.qml:396
 msgid " pending changes"
 msgstr ""
 
-#: ../qml/Main.qml:430
+#: ../qml/Main.qml:439
 msgid "Management:"
 msgstr ""
 
-#: ../qml/Main.qml:487
+#: ../qml/Main.qml:496
 msgid "Settings:"
 msgstr ""
 
-#: ../qml/Main.qml:549
+#: ../qml/Main.qml:558
 msgid "Update Channels"
 msgstr ""
 
-#: ../qml/Main.qml:561
+#: ../qml/Main.qml:570
 msgid "Consider updating your channels."
 msgstr ""
 
-#: ../qml/Main.qml:623
+#: ../qml/Main.qml:632
 msgid "Search results: "
 msgstr ""
 
-#: ../qml/Main.qml:700
+#: ../qml/Main.qml:709
 msgid "Marked for installation"
 msgstr ""
 
-#: ../qml/Main.qml:700
+#: ../qml/Main.qml:709
 msgid "Unknown State"
 msgstr ""
 

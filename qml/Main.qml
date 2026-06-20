@@ -263,6 +263,15 @@ MainView {
             root.init_main();
         }
 
+        // Refresh hm version / generation whenever we return to this page
+        // (e.g. after a generation switch or hm_switch from another page).
+        StackView.onActivated: {
+            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+            NixManagerPlugin.request_hm_version(root.currentRequestId);
+            root.currentRequestId = "VERSION_REQUEST_" + Date.now();
+            NixManagerPlugin.request_list_generations(root.currentRequestId);
+        }
+
         header: PageHeader {
             id: header
 
